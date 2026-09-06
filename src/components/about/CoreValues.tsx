@@ -1,0 +1,53 @@
+import { Target, Trophy, ShieldCheck } from "lucide-react";
+import { Reveal, SectionHeader } from "../ui/Reveal";
+import { company } from "../../data/company";
+
+const valuesData = [
+  {
+    title: "Our Vision",
+    text: company.vision,
+    Icon: Target,
+  },
+  {
+    title: "Our Mission",
+    text: company.mission,
+    Icon: Trophy,
+  },
+  {
+    title: "Our Values",
+    text: company.coreValues.join(" • "),
+    Icon: ShieldCheck,
+  },
+];
+
+export function CoreValues() {
+  return (
+    <section id="values" className="relative overflow-hidden py-16 sm:py-24 border-b border-[var(--border-soft)]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader 
+          eyebrow="Core Foundation"
+          title="Built on trust, driven by excellence."
+          text="Our principles guide every project we undertake, ensuring quality and integrity at every step."
+          align="center"
+        />
+
+        <div className="mt-10 grid gap-4 sm:mt-16 sm:gap-6 md:grid-cols-3">
+          {valuesData.map((item, index) => {
+            const Icon = item.Icon;
+            return (
+              <Reveal key={item.title} delay={index * 0.1}>
+                <div className="relative h-full flex flex-col items-center text-center rounded-[1.5rem] border border-[var(--border-soft)] bg-[var(--surface-light-elevated)] p-6 sm:p-10 shadow-[0_12px_40px_-24px_rgba(11,37,64,0.15)] dark:bg-white/5">
+                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-950 text-white dark:bg-white dark:text-slate-950 mb-6">
+                    <Icon className="h-7 w-7" />
+                  </span>
+                  <h3 className="text-xl font-black text-slate-950 dark:text-white mb-4">{item.title}</h3>
+                  <p className="text-base leading-7 text-slate-600 dark:text-slate-300 font-medium">{item.text}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

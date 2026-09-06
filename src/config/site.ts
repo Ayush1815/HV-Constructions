@@ -1,0 +1,15 @@
+export const siteConfig = {
+  name: "HV Construction Pvt. Ltd.",
+  shortName: "HV Construction",
+  tagline: "Building Infrastructure. Creating Spaces. Shaping the Future.",
+  url: "https://hvconstruction.com",
+  email: "info@hvconstruction.com",
+  phone: "+91 98765 43210",
+  whatsapp: "https://wa.me/919876543210",
+  instagram: "https://instagram.com",
+  facebook: "https://facebook.com",
+  linkedin: "https://linkedin.com",
+  calendlyUrl: "",
+  address: "Andheri East, Mumbai, Maharashtra 400059, India",
+  responseTime: "Within 1 business day",
+} as const;

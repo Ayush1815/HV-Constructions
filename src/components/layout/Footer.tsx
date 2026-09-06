@@ -1,0 +1,136 @@
+import { Link } from "react-router-dom";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { siteConfig } from "../../config/site";
+import { BrandMark } from "../brand/BrandMark";
+
+export function Footer() {
+  return (
+    <footer className="bg-slate-950 py-12 sm:py-16 text-white">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-4 md:gap-8 text-sm">
+          {/* Column 1 - Brand */}
+          <div className="flex flex-col space-y-6">
+            <div>
+              <BrandMark variant="footer" />
+            </div>
+            <p className="leading-relaxed text-slate-300">
+              Diversified construction &amp; infrastructure company delivering comprehensive solutions across
+              civil construction, government infrastructure, high-rise buildings, utility infrastructure and interior works.
+            </p>
+            <div className="pt-2">
+              <p className="mb-4 font-bold text-white">Connect With Us:</p>
+              <div className="flex flex-wrap gap-3">
+                {siteConfig.linkedin && (
+                  <a 
+                    href={siteConfig.linkedin} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0A66C2] text-white shadow-md transition-transform hover:-translate-y-1"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="h-5 w-5" fill="currentColor" />
+                  </a>
+                )}
+                {siteConfig.facebook && (
+                  <a 
+                    href={siteConfig.facebook} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#1877F2] text-white shadow-md transition-transform hover:-translate-y-1"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="h-5 w-5" fill="currentColor" />
+                  </a>
+                )}
+                {siteConfig.instagram && (
+                  <a 
+                    href={siteConfig.instagram} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-md transition-transform hover:-translate-y-1"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                )}
+                <a 
+                  href={`mailto:${siteConfig.email}`}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EA4335] text-white shadow-md transition-transform hover:-translate-y-1"
+                  aria-label="Email Us"
+                >
+                  <Mail className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 2 - Quick Links */}
+          <div>
+            <h3 className="mb-6 border-l-2 border-[var(--brand-gold)] pl-3 text-lg font-bold text-white">
+              Quick Links
+            </h3>
+            <div className="flex flex-col space-y-3 text-slate-300">
+              <Link to="/" className="w-fit transition hover:text-[var(--brand-gold)]">Home</Link>
+              <Link to="/about" className="w-fit transition hover:text-[var(--brand-gold)]">About Us</Link>
+              <Link to="/expertise" className="w-fit transition hover:text-[var(--brand-gold)]">Our Expertise</Link>
+              <Link to="/projects" className="w-fit transition hover:text-[var(--brand-gold)]">Projects</Link>
+              <Link to="/contact" className="w-fit transition hover:text-[var(--brand-gold)]">Contact Us</Link>
+              <Link to="/terms" className="w-fit transition hover:text-[var(--brand-gold)]">Terms &amp; Conditions</Link>
+              <Link to="/privacy" className="w-fit transition hover:text-[var(--brand-gold)]">Privacy Policy</Link>
+            </div>
+          </div>
+
+          {/* Column 3 - Our Expertise */}
+          <div>
+            <h3 className="mb-6 border-l-2 border-[var(--brand-gold)] pl-3 text-lg font-bold text-white">
+              Our Expertise
+            </h3>
+            <div className="flex flex-col space-y-3 text-slate-300">
+              <Link to="/expertise/government-infrastructure" className="w-fit transition hover:text-[var(--brand-gold)]">Government Infrastructure</Link>
+              <Link to="/expertise/jal-jeevan-mission" className="w-fit transition hover:text-[var(--brand-gold)]">Water Infrastructure</Link>
+              <Link to="/expertise/roads-transportation" className="w-fit transition hover:text-[var(--brand-gold)]">Roads &amp; Transportation</Link>
+              <Link to="/expertise/buildings-civil" className="w-fit transition hover:text-[var(--brand-gold)]">Buildings &amp; Civil</Link>
+              <Link to="/expertise/high-rise" className="w-fit transition hover:text-[var(--brand-gold)]">High-Rise Buildings</Link>
+              <Link to="/expertise/interior-design" className="w-fit transition hover:text-[var(--brand-gold)]">Interior Design</Link>
+              <Link to="/expertise/turnkey-solutions" className="w-fit transition hover:text-[var(--brand-gold)]">Turnkey Solutions</Link>
+            </div>
+          </div>
+
+          {/* Column 4 - Contact Details */}
+          <div>
+            <h3 className="mb-6 border-l-2 border-[var(--brand-gold)] pl-3 text-lg font-bold text-white">
+              Contact Details
+            </h3>
+            <div className="flex flex-col space-y-4 text-slate-300">
+              <span className="flex items-start gap-3">
+                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand-gold)]" />
+                <span className="leading-relaxed">
+                  <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} className="transition hover:text-[var(--brand-gold)]">
+                    {siteConfig.phone}
+                  </a>
+                </span>
+              </span>
+              <span className="flex items-center gap-3">
+                <Mail className="h-5 w-5 shrink-0 text-[var(--brand-gold)]" />
+                <a href={`mailto:${siteConfig.email}`} className="transition hover:text-[var(--brand-gold)]">
+                  {siteConfig.email}
+                </a>
+              </span>
+              <span className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand-gold)]" />
+                <span className="leading-relaxed">
+                  {siteConfig.address}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 sm:flex-row">
+          <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+          <p>Building Infrastructure. Creating Spaces. Shaping the Future.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
