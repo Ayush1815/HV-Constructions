@@ -30,8 +30,8 @@
     color-scheme: light;
     --brand-navy: #0b2540;
     --brand-navy-900: #071827;
-    --brand-gold: #cf9c2d;
-    --brand-gold-hover: #b98216;
+    --brand-gold: #EFBF04;
+    --brand-gold-hover: #d9ad03;
     --brand-gold-soft: #f2e4bd;
     --brand-gold-muted: #a87312;
     --surface-light: #f8faf7;
@@ -47,8 +47,8 @@
 
   .dark {
     color-scheme: dark;
-    --brand-gold: #e4bd60;
-    --brand-gold-hover: #f0cf7a;
+    --brand-gold: #EFBF04;
+    --brand-gold-hover: #ffd014;
     --brand-gold-soft: rgba(228, 189, 96, 0.15);
     --brand-gold-muted: #f0cf7a;
     --surface-light-elevated: rgba(248, 250, 252, 0.92);
