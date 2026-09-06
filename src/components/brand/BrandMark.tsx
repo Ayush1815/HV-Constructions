@@ -29,8 +29,8 @@ export function BrandMark({ animationKey = "static", variant = "header" }: Brand
           <Building2 className="h-7 w-7 text-[var(--brand-gold)]" strokeWidth={2.2} />
         </span>
         <span className="leading-none pt-1">
-          <span className="block text-[1.25rem] font-extrabold tracking-tight text-[var(--brand-navy)] dark:text-white">
-            HV<span className="text-[var(--brand-gold)]"> Construction</span>
+          <span className="block text-[1.25rem] font-extrabold tracking-tight text-slate-950 dark:text-white">
+            HV Construction
           </span>
           <span className="block mt-0.5 text-[0.56rem] font-semibold uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400 max-[430px]:hidden">
             Building Infrastructure · Creating Spaces
