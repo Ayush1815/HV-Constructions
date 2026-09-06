@@ -84,7 +84,7 @@ export function HeroSection() {
                   custom={reducedMotion ? 0 : 0.55}
                   initial="hidden"
                   animate="show"
-                  className="gold-shimmer-text block font-black tracking-tight"
+                  className="block"
                 >
                   Creating Spaces.
                 </motion.span>
