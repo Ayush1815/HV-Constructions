@@ -319,40 +319,26 @@ function SlideIndicators({
   onIndicatorClick: (index: number) => void;
 }) {
   return (
-    <div className="absolute inset-x-0 bottom-4 z-20 flex flex-col items-center gap-2">
-      <div className="flex justify-center gap-2">
-        {serviceCarouselSlides.map((slide, index) => (
-          <button
-            key={slide.id}
-            type="button"
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              onIndicatorClick(index);
-            }}
-            aria-label={`Show ${slide.eyebrow}`}
-            aria-current={index === activeIndex ? "true" : undefined}
-            className={classNames(
-              "h-2 rounded-full transition-[width,background-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]",
-              index === activeIndex
-                ? "w-8 bg-[var(--slide-accent)] shadow-[0_0_18px_-6px_rgb(var(--slide-accent-rgb)/0.9)]"
-                : "w-2 bg-slate-300/90 hover:bg-slate-400 dark:bg-white/26 dark:hover:bg-white/44",
-            )}
-          />
-        ))}
-      </div>
-
-      {/* Autoplay Progress Track */}
-      <div className="h-0.5 w-24 overflow-hidden rounded-full bg-slate-200/50 dark:bg-white/10">
-        <div 
-          key={activeIndex}
-          className="h-full bg-[var(--slide-accent)] rounded-full transition-all"
-          style={{
-            animation: "carousel-progress 3000ms linear",
-            transformOrigin: "left",
+    <div className="absolute inset-x-0 bottom-4 z-20 flex justify-center gap-2">
+      {serviceCarouselSlides.map((slide, index) => (
+        <button
+          key={slide.id}
+          type="button"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            onIndicatorClick(index);
           }}
+          aria-label={`Show ${slide.eyebrow}`}
+          aria-current={index === activeIndex ? "true" : undefined}
+          className={classNames(
+            "h-2 rounded-full transition-[width,background-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]",
+            index === activeIndex
+              ? "w-8 bg-[var(--slide-accent)] shadow-[0_0_18px_-6px_rgb(var(--slide-accent-rgb)/0.9)]"
+              : "w-2 bg-slate-300/90 hover:bg-slate-400 dark:bg-white/26 dark:hover:bg-white/44",
+          )}
         />
-      </div>
+      ))}
     </div>
   );
 }
