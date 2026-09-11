@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
 import { Reveal } from "../ui/Reveal";
 
@@ -16,13 +17,13 @@ export function CtaBanner() {
         </p>
         
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="shine-button relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[var(--brand-gold)] px-8 py-4 text-sm font-black text-[#071122] shadow-[0_12px_32px_-12px_rgba(207,156,45,0.6)] transition hover:bg-amber-400 sm:w-auto hover:-translate-y-0.5"
           >
             <span className="relative z-10">Start Your Project</span>
             <ArrowRight className="relative z-10 h-4 w-4" />
-          </a>
+          </Link>
         </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm font-semibold text-slate-400">

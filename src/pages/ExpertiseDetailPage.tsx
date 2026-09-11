@@ -3,7 +3,55 @@ import { useSeo } from "../hooks/useSeo";
 import { getExpertiseBySlug, expertiseAreas } from "../data/expertise";
 import { Reveal } from "../components/ui/Reveal";
 import { ButtonLink } from "../components/ui/ButtonLink";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Users, Trophy, ChevronRight } from "lucide-react";
+
+const galleryImages: Record<string, { src: string; caption: string }[]> = {
+  "government-infrastructure": [
+    { src: "/media/infrastructure/bridge-pier-construction.webp", caption: "Bridge Pier & Deep Foundation Works" },
+    { src: "/media/infrastructure/flyover-construction.webp", caption: "Multi-Span Flyover Structural Deck" },
+    { src: "/media/infrastructure/crushing-plant.webp", caption: "Aggregate & Batching Infrastructure" },
+  ],
+  "jal-jeevan-mission": [
+    { src: "/media/water/circular-reservoir-construction.webp", caption: "Reinforced Concrete Storage Reservoir" },
+    { src: "/media/water/hilltop-water-storage-reservoir.webp", caption: "Elevated Water Distribution Tank" },
+    { src: "/media/water/pipeline-trenching-installation.webp", caption: "Bulk Transmission Pipeline Laying" },
+  ],
+  "roads-transportation": [
+    { src: "/media/infrastructure/road-paving.webp", caption: "Heavy-Duty Bituminous Paving Works" },
+    { src: "/media/infrastructure/highway-interchange-aerial.webp", caption: "Multi-Lane Expressway Interchange" },
+    { src: "/media/infrastructure/flyover-construction.webp", caption: "Elevated Corridor & Bridge Works" },
+  ],
+  "optical-fibre-telecom": [
+    { src: "/media/telecom/bharatnet-hdd-trenchless-drilling.webp", caption: "HDD Trenchless Cable Ducting" },
+    { src: "/media/telecom/hdpe-duct-laying-work.webp", caption: "Multi-Duct Underground Telecom Route" },
+    { src: "/media/telecom/ofc-cable-blowing-manhole-installation.webp", caption: "Manhole Construction & Splicing Chambers" },
+  ],
+  "buildings-civil": [
+    { src: "/media/high-rise/commercial-frame-scaffolding.webp", caption: "Institutional RCC Framed Structure" },
+    { src: "/media/residential/luxury-white-villa-residence.webp", caption: "Premium Architectural Residential Build" },
+    { src: "/media/residential/modern-cantilever-luxury-villa.webp", caption: "Engineered Cantilever Framing" },
+  ],
+  "high-rise": [
+    { src: "/media/high-rise/curved-skyscraper-aerial.webp", caption: "Commercial High-Rise Curved Elevation" },
+    { src: "/media/high-rise/residential-tower-cranes.webp", caption: "Multi-Tower High-Rise Core Climbing" },
+    { src: "/media/high-rise/skyscraper-top-skyline.webp", caption: "Skyline Tower Structural Completion" },
+  ],
+  "private-development": [
+    { src: "/media/residential/grand-private-estate-courtyard.webp", caption: "Bespoke Luxury Estate Development" },
+    { src: "/media/residential/independent-home-under-construction.webp", caption: "Civil Framing & Wall Work Execution" },
+    { src: "/media/residential/contemporary-timber-facade-home.webp", caption: "Modern Architectural Finishing" },
+  ],
+  "interior-design": [
+    { src: "/media/interiors/luxury-atrium-lobby-interiors.webp", caption: "Grand Atrium Reception & Lobby" },
+    { src: "/media/interiors/executive-director-cabin.webp", caption: "Corporate Boardroom & Executive Cabins" },
+    { src: "/media/interiors/luxury-retail-showroom-fitout.webp", caption: "High-End Commercial Retail Fit-Out" },
+  ],
+  "turnkey-solutions": [
+    { src: "/media/turnkey/integrated-manufacturing-facility.webp", caption: "Industrial Manufacturing Campus" },
+    { src: "/media/turnkey/turnkey-epc-project-management.webp", caption: "End-to-End Turnkey Site Supervision" },
+    { src: "/media/infrastructure/city-center-metro-station.webp", caption: "Major Metro Terminal Civil Works" },
+  ],
+};
 
 export default function ExpertiseDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -21,6 +69,7 @@ export default function ExpertiseDetailPage() {
 
   const Icon = area.icon;
   const relatedAreas = expertiseAreas.filter((a) => a.id !== area.id).slice(0, 3);
+  const gallery = slug && galleryImages[slug] ? galleryImages[slug] : [];
 
   return (
     <div className="pt-24 pb-16 sm:pb-24">
@@ -31,6 +80,15 @@ export default function ExpertiseDetailPage() {
           style={{ backgroundColor: area.accentColor }} 
         />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumb Navigation */}
+          <nav aria-label="Breadcrumbs" className="mb-6 flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <Link to="/" className="hover:text-[var(--brand-gold)] transition-colors">Home</Link>
+            <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+            <Link to="/expertise" className="hover:text-[var(--brand-gold)] transition-colors">Expertise</Link>
+            <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
+            <span className="text-slate-900 dark:text-white font-bold truncate max-w-[200px] sm:max-w-none">{area.title}</span>
+          </nav>
+
           <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
             {/* Left Content */}
             <div className="lg:col-span-7">
@@ -194,6 +252,93 @@ export default function ExpertiseDetailPage() {
                 </div>
               </Reveal>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Execution Gallery */}
+      {gallery.length > 0 && (
+        <section className="py-16 border-t border-[var(--border-soft)] bg-slate-100/50 dark:bg-slate-900/40">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <Reveal>
+              <div className="mb-10 text-center max-w-2xl mx-auto">
+                <p className="text-xs font-bold uppercase tracking-widest text-[var(--brand-gold)] mb-2">Visual Showcase</p>
+                <h2 className="text-2xl font-black text-slate-950 dark:text-white sm:text-3xl">Division Execution Gallery</h2>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">On-site captures showcasing scale, structural precision, and high standard workmanship.</p>
+              </div>
+            </Reveal>
+
+            <div className="grid gap-6 sm:grid-cols-3">
+              {gallery.map((item, idx) => (
+                <Reveal key={idx} delay={idx * 0.1}>
+                  <div className="group relative overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-white dark:bg-slate-900 shadow-md">
+                    <div className="h-56 sm:h-64 w-full overflow-hidden bg-slate-200 dark:bg-slate-800">
+                      <img 
+                        src={item.src} 
+                        alt={item.caption} 
+                        loading="lazy" 
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                      />
+                    </div>
+                    <div className="p-4 bg-white dark:bg-slate-900">
+                      <p className="text-xs font-bold text-slate-900 dark:text-slate-200 line-clamp-1">{item.caption}</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">HV Construction Project Site</p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Why Choose HV Construction for this sector */}
+      <section className="py-16 border-t border-[var(--border-soft)] bg-white dark:bg-slate-950">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Reveal>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <p className="text-xs font-bold uppercase tracking-widest text-[var(--brand-gold)] mb-2">Our Advantage</p>
+              <h2 className="text-2xl font-black text-slate-950 dark:text-white sm:text-3xl">Why Choose HV Construction</h2>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">Our deep institutional experience and direct operational supervision ensure uncompromised project delivery.</p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-3">
+            <Reveal delay={0.05}>
+              <div className="rounded-2xl border border-[var(--border-soft)] bg-slate-50 dark:bg-slate-900/60 p-6 flex flex-col h-full shadow-sm hover:border-[var(--brand-gold)] transition-colors">
+                <div className="h-12 w-12 rounded-xl bg-amber-500/10 text-[var(--brand-gold)] flex items-center justify-center mb-4">
+                  <Trophy className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Proven Track Record</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Successfully delivered high-stakes projects across multiple government departments and private developers with strict quality adherence.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <div className="rounded-2xl border border-[var(--border-soft)] bg-slate-50 dark:bg-slate-900/60 p-6 flex flex-col h-full shadow-sm hover:border-[var(--brand-gold)] transition-colors">
+                <div className="h-12 w-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4">
+                  <Users className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Expert In-House Teams</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Full-time project managers, civil engineers, and MEP specialists dedicated to precise execution without sub-tier dilution.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div className="rounded-2xl border border-[var(--border-soft)] bg-slate-50 dark:bg-slate-900/60 p-6 flex flex-col h-full shadow-sm hover:border-[var(--brand-gold)] transition-colors">
+                <div className="h-12 w-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4">
+                  <ShieldCheck className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Safety &amp; Compliance</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Zero-compromise safety protocols, IS code compliance, and systematic material testing laboratories at project sites.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

@@ -1,30 +1,76 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, MapPin, Calendar, CheckCircle2 } from "lucide-react";
+import { X, MapPin, Calendar, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { Project } from "../../data/projects";
 import { classNames } from "../../lib/classNames";
 
 interface ProjectDetailModalProps {
   project: Project | null;
+  projects?: Project[];
+  onNavigate?: (project: Project) => void;
   isOpen: boolean;
   onClose: () => void;
   accentColor?: string;
 }
 
-export function ProjectDetailModal({ project, isOpen, onClose, accentColor = "#cf9c2d" }: ProjectDetailModalProps) {
+export function ProjectDetailModal({ 
+  project, 
+  projects = [],
+  onNavigate,
+  isOpen, 
+  onClose, 
+  accentColor = "#cf9c2d" 
+}: ProjectDetailModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const currentIndex = project && projects.length > 0 ? projects.findIndex(p => p.id === project.id) : -1;
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex >= 0 && currentIndex < projects.length - 1;
+
+  const handlePrev = () => {
+    if (hasPrev && onNavigate) onNavigate(projects[currentIndex - 1]);
+  };
+
+  const handleNext = () => {
+    if (hasNext && onNavigate) onNavigate(projects[currentIndex + 1]);
+  };
+
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      } else if (e.key === "ArrowLeft" && hasPrev) {
+        handlePrev();
+      } else if (e.key === "ArrowRight" && hasNext) {
+        handleNext();
+      } else if (e.key === "Tab" && modalRef.current) {
+        // Focus trap
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
     };
+
     if (isOpen) {
       document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleEscape);
+      window.addEventListener("keydown", handleKeyDown);
     }
     return () => {
       document.body.style.overflow = "unset";
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, currentIndex, hasPrev, hasNext]);
 
   return (
     <AnimatePresence>
@@ -39,6 +85,10 @@ export function ProjectDetailModal({ project, isOpen, onClose, accentColor = "#c
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <motion.div
+              ref={modalRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-modal-title"
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -54,6 +104,26 @@ export function ProjectDetailModal({ project, isOpen, onClose, accentColor = "#c
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
                 
+                {/* Next / Previous Controls */}
+                {hasPrev && (
+                  <button
+                    onClick={handlePrev}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full p-2 bg-slate-950/70 text-white hover:bg-slate-900 transition-colors backdrop-blur-md shadow-lg"
+                    aria-label="Previous project"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                )}
+                {hasNext && (
+                  <button
+                    onClick={handleNext}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 bg-slate-950/70 text-white hover:bg-slate-900 transition-colors backdrop-blur-md shadow-lg"
+                    aria-label="Next project"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                )}
+
                 {/* Close Button */}
                 <button
                   onClick={onClose}
@@ -87,7 +157,7 @@ export function ProjectDetailModal({ project, isOpen, onClose, accentColor = "#c
 
               {/* Scrollable details */}
               <div className="px-6 py-6 overflow-y-auto">
-                <h2 className="text-2xl font-black text-slate-950 dark:text-white mb-3">
+                <h2 id="project-modal-title" className="text-2xl font-black text-slate-950 dark:text-white mb-3">
                   {project.title}
                 </h2>
                 
@@ -129,10 +199,13 @@ export function ProjectDetailModal({ project, isOpen, onClose, accentColor = "#c
               </div>
               
               {/* Footer */}
-              <div className="p-4 bg-slate-50 dark:bg-slate-950/80 border-t border-[var(--border-soft)] flex-shrink-0">
+              <div className="p-4 bg-slate-50 dark:bg-slate-950/80 border-t border-[var(--border-soft)] flex-shrink-0 flex items-center justify-between gap-3">
+                <div className="text-xs text-slate-500 dark:text-slate-400">
+                  {currentIndex >= 0 && projects.length > 0 && `Project ${currentIndex + 1} of ${projects.length}`}
+                </div>
                 <button 
                   onClick={onClose}
-                  className="w-full inline-flex justify-center rounded-xl bg-[var(--brand-gold)] px-4 py-2.5 text-sm font-bold text-slate-900 shadow-md hover:bg-[var(--brand-gold-hover)] transition-colors"
+                  className="inline-flex justify-center rounded-xl bg-[var(--brand-gold)] px-6 py-2.5 text-sm font-bold text-slate-900 shadow-md hover:bg-[var(--brand-gold-hover)] transition-colors"
                 >
                   Close Details
                 </button>

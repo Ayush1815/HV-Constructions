@@ -39,6 +39,8 @@ export function CustomSelect({ value, onChange, options, className }: CustomSele
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
         className={classNames(
           "flex items-center justify-between text-left transition-all duration-200",
           className,
@@ -57,6 +59,7 @@ export function CustomSelect({ value, onChange, options, className }: CustomSele
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            role="listbox"
             initial={{ opacity: 0, y: -10, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.96 }}
@@ -67,6 +70,8 @@ export function CustomSelect({ value, onChange, options, className }: CustomSele
               const isSelected = option === value;
               return (
                 <button
+                  role="option"
+                  aria-selected={isSelected}
                   key={option}
                   type="button"
                   onClick={() => {

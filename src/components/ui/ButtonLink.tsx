@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
@@ -6,7 +7,7 @@ import { classNames } from "../../lib/classNames";
 
 type ButtonLinkProps = {
   to: string;
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: "primary" | "secondary" | "dark";
   trackLabel?: string;
   className?: string;

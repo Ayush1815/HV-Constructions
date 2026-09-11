@@ -136,7 +136,7 @@ export function HeroSection() {
             <div className="relative h-64 sm:h-80 w-full overflow-hidden rounded-3xl border-2 border-[var(--border-soft)] shadow-2xl group bg-slate-950">
               <motion.img
                 style={{ y: reducedMotion ? 0 : y }}
-                src="/media/infrastructure/highway-interchange-aerial.webp"
+                src="/media/hv-hero.jpg"
                 alt="HV Construction Infrastructure Projects"
                 className="h-[120%] w-full -mt-[10%] object-cover group-hover:scale-105 transition-transform duration-700"
               />

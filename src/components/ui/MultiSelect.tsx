@@ -53,6 +53,8 @@ export function MultiSelect({ value, onChange, options, className }: MultiSelect
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
         className={classNames(
           "flex items-center justify-between text-left transition-all duration-200",
           className,
@@ -71,6 +73,8 @@ export function MultiSelect({ value, onChange, options, className }: MultiSelect
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            role="listbox"
+            aria-multiselectable="true"
             initial={{ opacity: 0, y: -10, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.96 }}
@@ -82,6 +86,8 @@ export function MultiSelect({ value, onChange, options, className }: MultiSelect
                 const isSelected = value.includes(option);
                 return (
                   <button
+                    role="option"
+                    aria-selected={isSelected}
                     key={option}
                     type="button"
                     onClick={() => toggleOption(option)}

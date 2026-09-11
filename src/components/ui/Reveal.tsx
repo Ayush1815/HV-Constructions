@@ -1,3 +1,4 @@
+import type { ReactNode, Key } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { classNames } from "../../lib/classNames";
 
@@ -6,9 +7,10 @@ export function Reveal({
   className,
   delay = 0,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   delay?: number;
+  key?: Key;
 }) {
   const reducedMotion = useReducedMotion();
 

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
-import { ArrowLeft, ArrowRight, Film, MoveRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, MoveRight } from "lucide-react";
 import { serviceCarouselSlides, type ServiceCarouselSlide } from "../../data/serviceCarousel";
 import { classNames } from "../../lib/classNames";
 
@@ -49,9 +49,9 @@ function swipePower(offset: number, velocity: number) {
 }
 
 export function ServiceCarousel({
-  eyebrow = "Services carousel",
-  title = "Choose the service route your growth work needs next.",
-  copy = "Each route opens into a focused service page, with clear visual systems for operations, marketing, creative production, websites, and social media.",
+  eyebrow = "Our Expertise",
+  title = "Comprehensive construction & infrastructure solutions.",
+  copy = "Delivering quality across government, civil, high-rise, utility, and interior projects.",
   className,
 }: ServiceCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -97,6 +97,27 @@ export function ServiceCarousel({
     return () => window.clearInterval(interval);
   }, [goToNext, held, reducedMotion]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle if carousel is in view
+      const carouselEl = document.getElementById("service-carousel");
+      if (!carouselEl) return;
+      const rect = carouselEl.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+
+      if (e.key === "ArrowLeft") {
+        goToPrevious();
+      } else if (e.key === "ArrowRight") {
+        goToNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [goToPrevious, goToNext]);
+
   return (
     <section
       id="service-carousel"
@@ -107,7 +128,7 @@ export function ServiceCarousel({
       )}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-[linear-gradient(180deg,rgba(15,109,255,0.08),transparent)] dark:bg-[linear-gradient(180deg,rgba(15,109,255,0.1),transparent)]" />
-      <div className="relative mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1600px] px-4 sm:px-8 lg:px-16 xl:px-20">
 
         <div
           style={slideVars}
@@ -115,10 +136,8 @@ export function ServiceCarousel({
           onPointerLeave={() => setHeld(false)}
           onFocus={() => setHeld(true)}
           onBlur={() => setHeld(false)}
-          className="relative mx-auto max-w-full [perspective:1800px] [transform-style:preserve-3d]"
+          className="relative mx-auto max-w-full"
         >
-          <SidePreview slide={previousSlide} side="left" />
-          <SidePreview slide={nextSlide} side="right" />
 
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
@@ -300,26 +319,40 @@ function SlideIndicators({
   onIndicatorClick: (index: number) => void;
 }) {
   return (
-    <div className="absolute inset-x-0 bottom-5 z-20 flex justify-center gap-2">
-      {serviceCarouselSlides.map((slide, index) => (
-        <button
-          key={slide.id}
-          type="button"
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            onIndicatorClick(index);
+    <div className="absolute inset-x-0 bottom-4 z-20 flex flex-col items-center gap-2">
+      <div className="flex justify-center gap-2">
+        {serviceCarouselSlides.map((slide, index) => (
+          <button
+            key={slide.id}
+            type="button"
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              onIndicatorClick(index);
+            }}
+            aria-label={`Show ${slide.eyebrow}`}
+            aria-current={index === activeIndex ? "true" : undefined}
+            className={classNames(
+              "h-2 rounded-full transition-[width,background-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]",
+              index === activeIndex
+                ? "w-8 bg-[var(--slide-accent)] shadow-[0_0_18px_-6px_rgb(var(--slide-accent-rgb)/0.9)]"
+                : "w-2 bg-slate-300/90 hover:bg-slate-400 dark:bg-white/26 dark:hover:bg-white/44",
+            )}
+          />
+        ))}
+      </div>
+
+      {/* Autoplay Progress Track */}
+      <div className="h-0.5 w-24 overflow-hidden rounded-full bg-slate-200/50 dark:bg-white/10">
+        <div 
+          key={activeIndex}
+          className="h-full bg-[var(--slide-accent)] rounded-full transition-all"
+          style={{
+            animation: "carousel-progress 3000ms linear",
+            transformOrigin: "left",
           }}
-          aria-label={`Show ${slide.eyebrow}`}
-          aria-current={index === activeIndex ? "true" : undefined}
-          className={classNames(
-            "h-2.5 rounded-full transition-[width,background-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]",
-            index === activeIndex
-              ? "w-8 bg-[var(--slide-accent)] shadow-[0_0_18px_-6px_rgb(var(--slide-accent-rgb)/0.9)]"
-              : "w-2.5 bg-slate-300/90 hover:bg-slate-400 dark:bg-white/26 dark:hover:bg-white/44",
-          )}
         />
-      ))}
+      </div>
     </div>
   );
 }
@@ -335,8 +368,10 @@ function CarouselButton({ direction, onClick }: { direction: "previous" | "next"
       onClick={onClick}
       aria-label={direction === "previous" ? "Show previous service" : "Show next service"}
       className={classNames(
-        "absolute top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-slate-950/10 bg-white/78 text-[#0f6dff] shadow-[0_18px_42px_-28px_rgba(0,0,0,0.62)] backdrop-blur-md transition-colors duration-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)] dark:border-white/16 dark:bg-white/8 dark:text-[#5d8dff] dark:hover:bg-white/12 md:grid sm:h-[3.25rem] sm:w-[3.25rem]",
-        direction === "previous" ? "left-3 sm:left-4 lg:-left-4" : "right-3 sm:right-4 lg:-right-4",
+        "absolute top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-slate-950/10 bg-white text-[#0f6dff] shadow-[0_18px_42px_-28px_rgba(0,0,0,0.62)] backdrop-blur-md transition-colors duration-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)] dark:border-white/16 dark:bg-white/8 dark:text-[#5d8dff] dark:hover:bg-white/12 md:grid sm:h-[3.25rem] sm:w-[3.25rem]",
+        direction === "previous" 
+          ? "left-2 sm:-left-6 md:-left-8 lg:-left-12 xl:-left-14" 
+          : "right-2 sm:-right-6 md:-right-8 lg:-right-12 xl:-right-14",
       )}
     >
       <Icon className="h-5 w-5" strokeWidth={2.3} />

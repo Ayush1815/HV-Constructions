@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { useSeo } from "../hooks/useSeo";
 import { projects, projectCategories, Project } from "../data/projects";
 import { expertiseAreas } from "../data/expertise";
@@ -17,7 +18,13 @@ export default function ProjectsPage() {
 
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [activeStatus, setActiveStatus] = useState<string>("all");
+  const [visibleCount, setVisibleCount] = useState<number>(9);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  // Reset pagination on filter change
+  useEffect(() => {
+    setVisibleCount(9);
+  }, [activeCategory, activeStatus]);
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -57,6 +64,7 @@ export default function ProjectsPage() {
             <div className="mb-10 flex flex-col md:flex-row justify-between items-center gap-4 bg-[var(--surface-light)] dark:bg-[var(--surface-light-elevated)] p-4 rounded-xl border border-[var(--border-soft)] shadow-sm">
               <div className="w-full md:w-auto overflow-x-auto pb-2 md:pb-0 flex gap-2 hide-scrollbar">
                 <select 
+                  aria-label="Filter by category"
                   className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[var(--brand-gold)] focus:outline-none"
                   value={activeCategory}
                   onChange={(e) => setActiveCategory(e.target.value)}
@@ -87,19 +95,50 @@ export default function ProjectsPage() {
             </div>
           </Reveal>
 
-          {/* Grid */}
+          {/* Project Count Badge */}
+          <div className="mb-6 flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <span>
+              Showing {Math.min(visibleCount, filteredProjects.length)} of {filteredProjects.length} projects
+              {filteredProjects.length !== projects.length && ` (filtered from ${projects.length} total)`}
+            </span>
+          </div>
+
+          {/* Grid with animated transitions */}
           {filteredProjects.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredProjects.map((project, idx) => (
-                <Reveal key={project.id} delay={idx * 0.05}>
-                  <ProjectCard 
-                    project={project} 
-                    onClick={() => setSelectedProject(project)}
-                    accentColor={getProjectAccent(project.category)}
-                  />
-                </Reveal>
-              ))}
-            </div>
+            <>
+              <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <AnimatePresence mode="popLayout">
+                  {filteredProjects.slice(0, visibleCount).map((project) => (
+                    <motion.div
+                      key={project.id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.92, y: 15 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.92, y: -10 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <ProjectCard 
+                        project={project} 
+                        onClick={() => setSelectedProject(project)}
+                        accentColor={getProjectAccent(project.category)}
+                      />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Load More Button */}
+              {visibleCount < filteredProjects.length && (
+                <div className="mt-12 text-center">
+                  <button
+                    onClick={() => setVisibleCount(v => v + 6)}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--border-soft)] bg-white dark:bg-slate-800 px-8 py-3 text-sm font-bold text-slate-900 dark:text-white shadow-sm hover:border-[var(--brand-gold)] hover:bg-slate-50 dark:hover:bg-slate-750 transition-all hover:-translate-y-0.5"
+                  >
+                    Load More Projects ({filteredProjects.length - visibleCount} remaining)
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-20">
               <p className="text-slate-500 dark:text-slate-400 text-lg">No projects found matching the selected filters.</p>
@@ -118,6 +157,8 @@ export default function ProjectsPage() {
 
       <ProjectDetailModal 
         project={selectedProject} 
+        projects={filteredProjects}
+        onNavigate={setSelectedProject}
         isOpen={selectedProject !== null} 
         onClose={() => setSelectedProject(null)} 
         accentColor={selectedProject ? getProjectAccent(selectedProject.category) : undefined}

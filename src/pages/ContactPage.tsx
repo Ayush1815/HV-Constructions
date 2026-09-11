@@ -12,9 +12,9 @@ export default function ContactPage() {
   });
 
   return (
-    <div className="pt-24 pb-16 sm:pt-32 sm:pb-24">
+    <div className="pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-48">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Column */}
           <Reveal>
             <div>
@@ -35,7 +35,12 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Phone</h3>
-                    <p className="text-slate-600 dark:text-slate-300">{siteConfig.phone}</p>
+                    <a 
+                      href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} 
+                      className="text-slate-600 dark:text-slate-300 hover:text-[var(--brand-gold)] transition-colors inline-flex items-center font-medium"
+                    >
+                      {siteConfig.phone}
+                    </a>
                   </div>
                 </div>
 
@@ -45,7 +50,12 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Email</h3>
-                    <p className="text-slate-600 dark:text-slate-300">{siteConfig.email}</p>
+                    <a 
+                      href={`mailto:${siteConfig.email}`} 
+                      className="text-slate-600 dark:text-slate-300 hover:text-[var(--brand-gold)] transition-colors inline-flex items-center font-medium"
+                    >
+                      {siteConfig.email}
+                    </a>
                   </div>
                 </div>
 
@@ -70,6 +80,21 @@ export default function ContactPage() {
                     <p className="text-slate-600 dark:text-slate-300">Mon – Sat: 9:00 AM – 6:00 PM IST</p>
                   </div>
                 </div>
+
+                {/* WhatsApp Quick Chat */}
+                {siteConfig.whatsapp && (
+                  <div className="pt-2">
+                    <a
+                      href={siteConfig.whatsapp}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-3 rounded-2xl bg-[#25D366]/10 border border-[#25D366]/30 px-5 py-3.5 text-sm font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all hover:-translate-y-0.5"
+                    >
+                      <img src="/media/whatsapp.webp" alt="" className="h-5 w-5 object-contain" />
+                      <span>Chat Directly with Project Team on WhatsApp</span>
+                    </a>
+                  </div>
+                )}
               </div>
 
               {/* Google Map Embed */}
@@ -89,9 +114,9 @@ export default function ContactPage() {
           </Reveal>
 
           {/* Right Column */}
-          <Reveal delay={0.2} className="h-full">
-            <InquiryFormSection />
-          </Reveal>
+          <div className="h-full">
+            <InquiryFormSection hideText={true} />
+          </div>
         </div>
       </div>
     </div>

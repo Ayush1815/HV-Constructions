@@ -14,7 +14,7 @@ export function FaqSection() {
         <SectionHeader
           eyebrow="FAQ"
           title="Straight answers before we start."
-          text="The goal is a calm, clear partnership. Here are the questions ecommerce teams usually ask before booking an audit."
+          text="Common questions from clients and partners before starting a construction project with us."
           align="center"
         />
 

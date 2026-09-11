@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, Clock, Globe, Mail, Phone } from "lucide-react";
+import { ArrowRight, Clock, Globe, Mail, Phone, CheckCircle2 } from "lucide-react";
 import { initialInquiryForm, type ProjectInquiry, projectTypeOptions, budgetOptions, timelineOptions } from "../../data/inquiryForm";
 import { siteConfig } from "../../config/site";
 import { classNames } from "../../lib/classNames";
@@ -10,7 +10,7 @@ import { Reveal, SectionHeader } from "../ui/Reveal";
 import { CustomSelect } from "../ui/CustomSelect";
 import { MultiSelect } from "../ui/MultiSelect";
 
-export function InquiryFormSection() {
+export function InquiryFormSection({ hideText = false }: { hideText?: boolean }) {
   const [form, setForm] = useState<ProjectInquiry>(initialInquiryForm);
   const [errors, setErrors] = useState<Partial<Record<keyof ProjectInquiry, string>>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -32,6 +32,19 @@ export function InquiryFormSection() {
     setSubmitError(null);
   };
 
+  const validateField = (field: keyof ProjectInquiry) => {
+    let error: string | undefined;
+    if (field === "name" && !form.name.trim()) error = "Enter your name.";
+    if (field === "organization" && !form.organization.trim()) error = "Enter your organization name.";
+    if (field === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) error = "Enter a valid email address.";
+    if (field === "phone" && !form.phone.trim()) error = "Enter a valid phone number.";
+    if (field === "projectLocation" && !form.projectLocation.trim()) error = "Enter the project location.";
+    if (field === "description" && !form.description.trim()) error = "Provide a brief description of your project.";
+    if (error) {
+      setErrors(prev => ({ ...prev, [field]: error }));
+    }
+  };
+
   const validate = () => {
     const nextErrors: Partial<Record<keyof ProjectInquiry, string>> = {};
     if (!form.name.trim()) nextErrors.name = "Enter your name.";
@@ -44,7 +57,7 @@ export function InquiryFormSection() {
     return nextErrors;
   };
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextErrors = validate();
     setErrors(nextErrors);
@@ -77,39 +90,13 @@ export function InquiryFormSection() {
   const fieldBase =
     "mt-2 w-full rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3.5 text-sm font-semibold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[var(--brand-gold)] focus:ring-4 focus:ring-amber-500/15 dark:bg-white/8 dark:text-white dark:placeholder:text-slate-500";
 
-  return (
-    <section id="contact" className="border-t border-slate-200/80 py-16 dark:border-white/10 sm:py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.86fr_1.14fr] lg:px-8">
-        <div>
-          <SectionHeader
-            eyebrow="Get a Quote"
-            title="Start Your Project"
-            text="Tell us about your project requirements and our team will get back to you within one business day to discuss how we can help."
-          />
-          <div className="mt-10 grid gap-3 text-sm text-slate-600 dark:text-slate-300">
-            <span className="flex items-center gap-2">
-              <Mail className="h-4 w-4 shrink-0 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)]" />
-              <a href={`mailto:${siteConfig.email}`} className="font-semibold hover:text-[var(--brand-gold-muted)] dark:hover:text-[var(--brand-gold)]">
-                {siteConfig.email}
-              </a>
-            </span>
-            <span className="flex items-center gap-2">
-              <Phone className="h-4 w-4 shrink-0 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)]" />
-              {siteConfig.phone}
-            </span>
-            <span className="flex items-center gap-2 rounded-2xl border border-emerald-500/20 bg-emerald-50/80 px-3 py-2 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-200 w-fit">
-              <Clock className="h-4 w-4 shrink-0" />
-              Typical reply: 1 business day
-            </span>
-          </div>
-        </div>
-
-        <Reveal>
-          <form
-            onSubmit={onSubmit}
-            noValidate
-            className="rounded-[2rem] border border-[var(--border-soft)] bg-[var(--surface-light-elevated)] p-5 shadow-[0_34px_100px_-62px_rgba(11,37,64,0.72)] dark:bg-[var(--surface-dark-elevated)] sm:p-7"
-          >
+  const formContent = (
+    <Reveal>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        className="rounded-[2rem] border border-[var(--border-soft)] bg-[var(--surface-light-elevated)] p-5 shadow-[0_34px_100px_-62px_rgba(11,37,64,0.72)] dark:bg-[var(--surface-dark-elevated)] sm:p-7"
+      >
             <input
               type="text"
               name="website"
@@ -127,6 +114,7 @@ export function InquiryFormSection() {
                 <input
                   value={form.name}
                   onFocus={markStarted}
+                  onBlur={() => validateField("name")}
                   onChange={(event) => updateField("name", event.target.value)}
                   className={classNames(fieldBase, errors.name && "border-red-500")}
                   autoComplete="name"
@@ -140,6 +128,7 @@ export function InquiryFormSection() {
                 <input
                   type="email"
                   value={form.email}
+                  onBlur={() => validateField("email")}
                   onChange={(event) => updateField("email", event.target.value)}
                   className={classNames(fieldBase, errors.email && "border-red-500")}
                   autoComplete="email"
@@ -153,6 +142,7 @@ export function InquiryFormSection() {
                 <input
                   type="tel"
                   value={form.phone}
+                  onBlur={() => validateField("phone")}
                   onChange={(event) => updateField("phone", event.target.value)}
                   className={classNames(fieldBase, errors.phone && "border-red-500")}
                   autoComplete="tel"
@@ -165,6 +155,7 @@ export function InquiryFormSection() {
                 Organization / Company <span className="text-red-500">*</span>
                 <input
                   value={form.organization}
+                  onBlur={() => validateField("organization")}
                   onChange={(event) => updateField("organization", event.target.value)}
                   className={classNames(fieldBase, errors.organization && "border-red-500")}
                   autoComplete="organization"
@@ -180,6 +171,7 @@ export function InquiryFormSection() {
                 <input
                   type="text"
                   value={form.projectLocation}
+                  onBlur={() => validateField("projectLocation")}
                   onChange={(event) => updateField("projectLocation", event.target.value)}
                   className={classNames(fieldBase, errors.projectLocation && "border-red-500")}
                   placeholder="City, State"
@@ -265,20 +257,68 @@ export function InquiryFormSection() {
             <AnimatePresence>
               {submitted && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="mt-5 space-y-4 rounded-2xl border border-emerald-500/25 bg-emerald-50 p-5 text-sm text-emerald-900 dark:bg-emerald-500/10 dark:text-emerald-100"
+                  initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                  transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  className="mt-6 space-y-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center sm:p-8"
                 >
-                  <p className="font-bold text-base">Inquiry received successfully.</p>
-                  <p className="leading-relaxed">
-                    Thank you for reaching out to HV Construction. Our project estimation team is reviewing your requirements and will contact you shortly to discuss the next steps.
-                  </p>
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                    <CheckCircle2 className="h-9 w-9" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-black text-slate-950 dark:text-white">
+                      Inquiry Received Successfully!
+                    </h4>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+                      Thank you for reaching out to HV Construction. Our project engineering and estimation team has received your project parameters and will contact you within 1 business day.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="mt-4 inline-flex items-center justify-center rounded-full border border-emerald-500/40 bg-white dark:bg-slate-900 px-5 py-2.5 text-xs font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-slate-800 transition-colors shadow-sm"
+                  >
+                    Submit Another Project Inquiry
+                  </button>
                 </motion.div>
               )}
             </AnimatePresence>
           </form>
-        </Reveal>
+    </Reveal>
+  );
+
+  if (hideText) {
+    return formContent;
+  }
+
+  return (
+    <section id="contact" className="border-t border-slate-200/80 py-16 dark:border-white/10 sm:py-24">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.86fr_1.14fr] lg:px-8">
+        <div>
+          <SectionHeader
+            eyebrow="Get a Quote"
+            title="Start Your Project"
+            text="Tell us about your project requirements and our team will get back to you within one business day to discuss how we can help."
+          />
+          <div className="mt-10 grid gap-3 text-sm text-slate-600 dark:text-slate-300">
+            <span className="flex items-center gap-2">
+              <Mail className="h-4 w-4 shrink-0 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)]" />
+              <a href={`mailto:${siteConfig.email}`} className="font-semibold hover:text-[var(--brand-gold-muted)] dark:hover:text-[var(--brand-gold)]">
+                {siteConfig.email}
+              </a>
+            </span>
+            <span className="flex items-center gap-2">
+              <Phone className="h-4 w-4 shrink-0 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)]" />
+              {siteConfig.phone}
+            </span>
+            <span className="flex items-center gap-2 rounded-2xl border border-emerald-500/20 bg-emerald-50/80 px-3 py-2 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-200 w-fit">
+              <Clock className="h-4 w-4 shrink-0" />
+              Typical reply: 1 business day
+            </span>
+          </div>
+        </div>
+        {formContent}
       </div>
     </section>
   );

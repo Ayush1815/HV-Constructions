@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 type Lead = {
   id: string;
@@ -111,7 +111,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
     setLoginError(null);
     const authString = btoa(`${username}:${password}`);
@@ -214,7 +214,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleAddLead = async (e: React.FormEvent) => {
+  const handleAddLead = async (e: FormEvent) => {
     e.preventDefault();
     setAddingLead(true);
     try {

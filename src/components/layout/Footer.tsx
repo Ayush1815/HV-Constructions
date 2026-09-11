@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, ArrowUp } from "lucide-react";
 import { siteConfig } from "../../config/site";
 import { BrandMark } from "../brand/BrandMark";
 
@@ -126,9 +126,19 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 sm:flex-row">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <p>Building Infrastructure. Creating Spaces. Shaping the Future.</p>
+          <div className="flex items-center gap-6">
+            <p className="hidden md:block">Building Infrastructure. Creating Spaces. Shaping the Future.</p>
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10 hover:border-[var(--brand-gold)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]"
+              aria-label="Back to top"
+            >
+              <ArrowUp className="h-3.5 w-3.5 text-[var(--brand-gold)]" />
+              <span>Back to Top</span>
+            </button>
+          </div>
         </div>
       </div>
     </footer>

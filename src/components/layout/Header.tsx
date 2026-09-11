@@ -14,11 +14,28 @@ type HeaderProps = {
 
 export function Header({ theme, onToggleTheme }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY > 90 && currentY > lastY && !mobileOpen) {
+        setHidden(true);
+      } else if (currentY < lastY || currentY <= 90) {
+        setHidden(false);
+      }
+      lastY = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -30,7 +47,10 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
   }, [mobileOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 px-4 sm:top-6 lg:px-8">
+    <header className={classNames(
+      "fixed inset-x-0 top-4 z-50 px-4 sm:top-6 lg:px-8 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+      hidden ? "-translate-y-28" : "translate-y-0"
+    )}>
       <nav
         className="mx-auto flex max-w-[1280px] items-center justify-between gap-3"
         aria-label="Main navigation"
