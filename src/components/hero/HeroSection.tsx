@@ -40,7 +40,7 @@ export function HeroSection() {
       <div className="mx-auto grid w-full max-w-[1440px] items-center gap-10 px-4 pb-16 pt-28 sm:gap-12 sm:px-6 sm:pb-20 sm:pt-36 lg:min-h-[100svh] lg:grid-cols-12 lg:gap-10 lg:px-8 lg:py-16">
 
         {/* ── Left: Text Content ── */}
-        <div className="relative z-10 flex w-full flex-col justify-center lg:col-span-6 xl:col-span-6">
+        <div className="relative z-10 flex w-full flex-col justify-center lg:col-span-5 xl:col-span-5">
           <motion.div
             initial={reducedMotion ? false : "hidden"}
             animate="show"
@@ -64,7 +64,7 @@ export function HeroSection() {
             {/* Headline */}
             <h1
               aria-label="Building Infrastructure. Creating Spaces. Shaping the Future."
-              className="mt-6 text-[2rem] font-black leading-[1.18] tracking-tight text-slate-900 sm:text-4xl sm:leading-[1.16] lg:text-5xl xl:text-[3.35rem] dark:text-white"
+              className="mt-6 text-[2.15rem] font-black leading-[1.14] tracking-tight text-slate-900 sm:text-4xl sm:leading-[1.12] lg:text-[2.65rem] xl:text-[3.15rem] dark:text-white"
             >
               <span aria-hidden="true" className="block overflow-visible pb-1 pt-0.5">
                 <motion.span
@@ -131,9 +131,9 @@ export function HeroSection() {
         </div>
 
         {/* ── Right: Visual Photo Showcase & Stats ── */}
-        <div className="relative z-10 flex w-full flex-col gap-6 lg:col-span-6 xl:col-span-6">
+        <div className="relative z-10 flex w-full flex-col gap-5 lg:col-span-7 xl:col-span-7">
           <Reveal delay={0.2}>
-            <div className="relative h-64 sm:h-80 w-full overflow-hidden rounded-3xl border-2 border-[var(--border-soft)] shadow-2xl group bg-slate-950">
+            <div className="relative h-80 sm:h-96 lg:h-[430px] xl:h-[470px] w-full overflow-hidden rounded-3xl border-2 border-[var(--border-soft)] shadow-2xl group bg-slate-950">
               <motion.img
                 style={{ y: reducedMotion ? 0 : y }}
                 src="/media/hv-hero.jpg"
@@ -150,7 +150,7 @@ export function HeroSection() {
                 </span>
               </div>
 
-              <div className="absolute bottom-4 left-4 right-4 text-white">
+              <div className="absolute bottom-5 left-5 right-5 text-white">
                 <div className="flex items-center gap-2 text-xs font-bold text-[var(--brand-gold)] mb-1">
                   <Award className="h-4 w-4" />
                   <span>National Civil Infrastructure Project</span>

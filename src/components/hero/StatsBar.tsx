@@ -9,11 +9,11 @@ export function StatsBar() {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-2 xl:grid-cols-4 lg:gap-6 w-full">
+    <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-4 lg:grid-cols-4 w-full">
       {stats.map((stat, i) => (
         <div 
           key={i}
-          className="flex flex-col items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-white/50 p-6 text-center shadow-sm backdrop-blur-xl dark:bg-[var(--surface-dark-elevated)]/50 dark:border-white/10"
+          className="flex flex-col items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-white/70 p-4 sm:p-5 text-center shadow-sm backdrop-blur-xl dark:bg-[var(--surface-dark-elevated)]/60 dark:border-white/10 transition-transform hover:-translate-y-0.5"
         >
           <div className="text-3xl font-black text-slate-900 dark:text-white mb-2">
             <AnimatedCounter value={stat.value} suffix={stat.suffix} />
