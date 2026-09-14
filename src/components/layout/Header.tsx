@@ -56,10 +56,10 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
 
   return (
     <header className={classNames(
-      "fixed inset-x-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+      "fixed inset-x-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] border-b",
       isScrolled 
-        ? "top-0 bg-white/95 py-3 px-4 shadow-sm backdrop-blur-md dark:bg-[#071017]/95 lg:px-8 border-b border-slate-200/50 dark:border-white/5" 
-        : "top-4 sm:top-6 px-4 lg:px-8",
+        ? "top-0 bg-white/95 py-3 px-4 shadow-sm backdrop-blur-md dark:bg-[#071017]/95 lg:px-8 border-slate-200/50 dark:border-white/5" 
+        : "top-4 sm:top-6 px-4 lg:px-8 border-transparent",
       hidden ? "-translate-y-full" : "translate-y-0"
     )}>
       <nav

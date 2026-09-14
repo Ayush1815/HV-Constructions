@@ -44,7 +44,7 @@ export function BrandMark({ animationKey = "static", variant = "header" }: Brand
               isFooter ? "text-slate-300" : "text-slate-500 dark:text-slate-400"
             }`}
           >
-            Constructions
+            Construction
           </span>
         </div>
       </motion.span>
