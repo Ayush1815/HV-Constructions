@@ -77,6 +77,38 @@ export const serviceCarouselSlides: ServiceCarouselSlide[] = [
     ],
   },
   {
+    id: "interior-design",
+    eyebrow: "Interior Design & Luxury Decor",
+    routePath: "/expertise/interior-design",
+    routeLabel: "Luxury Living, Kitchens, Suites & Turnkey Fitouts",
+    images: {
+      light: "/media/carousel/carousel_interior_design.webp",
+      dark: "/media/carousel/carousel_interior_design.webp",
+    },
+    imageAlt: "Luxury living room and bespoke interior decor execution",
+    Icon: Palette,
+    headline: [
+      { text: "Crafting bespoke interiors with" },
+      { accent: "luxury decor." },
+    ],
+    description:
+      "End-to-end luxury residential & commercial interiors. From custom false ceilings and ambient lighting to bespoke modular kitchens, Italian marble, and turnkey execution.",
+    cta: "Explore Luxury Interiors",
+    proof: {
+      value: "Bespoke",
+      text: "3D design to turnkey delivery.",
+    },
+    accent: "#c026d3",
+    accentRgb: "192 38 211",
+    secondaryAccent: "#a21caf",
+    features: [
+      { label: "Luxury Living", Icon: Home },
+      { label: "Modular Kitchens", Icon: Cog },
+      { label: "False Ceilings", Icon: Ruler },
+      { label: "Turnkey Decor", Icon: Palette },
+    ],
+  },
+  {
     id: "jal-jeevan-mission",
     eyebrow: "Water Infrastructure",
     routePath: "/expertise/jal-jeevan-mission",
@@ -202,38 +234,6 @@ export const serviceCarouselSlides: ServiceCarouselSlide[] = [
       { label: "Structural Core", Icon: HardHat },
       { label: "Curtain Glazing", Icon: Palette },
       { label: "Allied works", Icon: Cog },
-    ],
-  },
-  {
-    id: "interior-design",
-    eyebrow: "Interior Design & Execution",
-    routePath: "/expertise/interior-design",
-    routeLabel: "Luxury Lobbies, Corporate & Turnkey",
-    images: {
-      light: "/media/carousel/carousel_interior_design.webp",
-      dark: "/media/carousel/carousel_interior_design.webp",
-    },
-    imageAlt: "Luxury architectural interior execution",
-    Icon: Palette,
-    headline: [
-      { text: "Transforming spaces into" },
-      { accent: "experiences." },
-    ],
-    description:
-      "Complete interior solutions from spatial planning to execution, delivering luxury finishes for hospitality, corporate and commercial properties.",
-    cta: "View Interiors",
-    proof: {
-      value: "Turnkey",
-      text: "interior delivery.",
-    },
-    accent: "#c026d3",
-    accentRgb: "192 38 211",
-    secondaryAccent: "#a21caf",
-    features: [
-      { label: "Space planning", Icon: Ruler },
-      { label: "Lobbies & Atriums", Icon: Building2 },
-      { label: "Finishes", Icon: Palette },
-      { label: "Custom Millwork", Icon: Home },
     ],
   },
 ];

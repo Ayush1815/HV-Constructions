@@ -173,23 +173,61 @@ export const expertiseAreas: ExpertiseArea[] = [
     id: "interior-design",
     slug: "interior-design",
     number: "08",
-    title: "Interior Design & Execution",
-    tagline: "Creating functional and aesthetic interiors tailored to your vision.",
+    title: "Interior Design & Luxury Decor",
+    tagline: "Transforming residential and commercial spaces with bespoke luxury decor, false ceilings, modular woodwork, and turnkey execution.",
     icon: Palette,
-    description: "Providing turnkey interior solutions and comprehensive design services.",
-    capabilities: [],
+    description: "Delivering end-to-end interior design and decor execution from initial 3D visualization to final handcrafted installation.",
+    capabilities: [
+      "Luxury residential interior design & decor",
+      "Designer false ceilings & architectural lighting",
+      "Bespoke modular kitchens & dining spaces",
+      "Master bedroom suites & custom wardrobes",
+      "Italian marble, hardwood & premium flooring",
+      "Acoustic wall paneling & fluted woodwork",
+      "Commercial & corporate executive fitouts",
+      "End-to-end turnkey interior execution with 3D design"
+    ],
     subCategories: [
       {
-        title: "Interior Solutions",
-        items: ["Residential interiors", "Luxury home interiors", "Apartment interiors", "Office interiors", "Corporate interiors", "Commercial interiors", "Retail & showroom interiors", "Hospitality interiors", "Institutional interiors", "Government interiors", "Turnkey interior execution"]
+        title: "Residential Decor & Living",
+        items: [
+          "Luxury living rooms & lounges",
+          "Contemporary master bedroom suites",
+          "Bespoke modular kitchens with islands",
+          "High-end dining spaces & bar counters",
+          "Custom walk-in wardrobes & dressers",
+          "Grand entrance foyers & private lobbies",
+          "Home theatres & entertainment dens",
+          "Turnkey villa & penthouse interiors"
+        ]
       },
       {
-        title: "Our Interior Services",
-        items: ["Space planning", "Interior design", "False ceilings", "Flooring", "Wall finishes", "Painting & textures", "Electrical works", "Lighting", "Modular solutions", "Custom furniture", "Doors & partitions", "Architectural finishes", "Complete interior execution"]
+        title: "Architectural Finishes & Craftsmanship",
+        items: [
+          "Multi-level gypsum false ceilings",
+          "Concealed LED cove & magnetic track lights",
+          "Italian marble flooring & brass inlays",
+          "Fluted timber wall louvers & acoustic panels",
+          "Custom handcrafted millwork & furniture",
+          "Minimalist glass & metal room partitions",
+          "Designer wallpaper, textured paints & veneers",
+          "Complete electrical, automation & HVAC coordination"
+        ]
+      },
+      {
+        title: "Commercial & Executive Fitouts",
+        items: [
+          "Corporate headquarters & boardrooms",
+          "Executive director cabins & lounges",
+          "Luxury retail boutiques & showrooms",
+          "Hospitality & restaurant interiors",
+          "Acoustic office partitions & glass cabins",
+          "Turnkey commercial interior execution"
+        ]
       }
     ],
     accentColor: "#c026d3", // Fuchsia
-    image: "/media/interiors/luxury-atrium-lobby-interiors.webp"
+    image: "/media/interiors/luxury-living-room-decor.webp"
   },
   {
     id: "turnkey",

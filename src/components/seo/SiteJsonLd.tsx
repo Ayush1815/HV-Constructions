@@ -16,8 +16,26 @@ export function OrganizationJsonLd() {
         telephone: siteConfig.phone,
         address: {
           "@type": "PostalAddress",
+          streetAddress: "House No. 1 Vedic Enclave, Near Amity University, Nijampur, Malhaur",
+          addressLocality: "Lucknow",
+          addressRegion: "Uttar Pradesh",
+          postalCode: "226028",
           addressCountry: "IN",
         },
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            telephone: siteConfig.phone,
+            contactType: "customer service",
+            availableLanguage: ["English", "Hindi"],
+          },
+          {
+            "@type": "ContactPoint",
+            telephone: siteConfig.secondaryPhone,
+            contactType: "executive sales",
+            availableLanguage: ["English", "Hindi"],
+          },
+        ],
         areaServed: "IN",
         serviceType: [
           "Civil Construction",

@@ -28,19 +28,65 @@ export default function ContactPage() {
                 Whether you have a specific project in mind or want to explore how our expertise can benefit your upcoming development, we are ready to build with you.
               </p>
 
-              <div className="space-y-8">
+              {/* Key Executive Contacts from Business Card */}
+              <div className="mb-10 space-y-4">
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+                  Key Executive Contacts
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {siteConfig.contacts.map((contact) => (
+                    <div
+                      key={contact.name}
+                      className="rounded-2xl border border-[var(--border-soft)] bg-white/70 p-5 shadow-sm backdrop-blur-xl dark:bg-[var(--surface-dark-elevated)]/60 transition-transform hover:-translate-y-1"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-900/20 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)]">
+                          <Phone className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-slate-900 dark:text-white text-base leading-snug">
+                            {contact.name}
+                          </h3>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                            Executive Contact
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-3 flex items-center justify-between pt-3 border-t border-slate-100 dark:border-white/5">
+                        <a
+                          href={`tel:${contact.phoneClean}`}
+                          className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-[var(--brand-gold)] transition-colors"
+                        >
+                          <Phone className="h-3.5 w-3.5 text-[var(--brand-gold)]" />
+                          <span>{contact.phone}</span>
+                        </a>
+                        <a
+                          href={contact.whatsapp}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 rounded-lg bg-[#25D366]/10 px-2.5 py-1 text-xs font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-colors"
+                          title="Chat on WhatsApp"
+                        >
+                          <span>Chat</span>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* General Contact Info */}
+              <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
-                    <Phone className="h-6 w-6" />
+                  <div className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400">
+                    <MapPin className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Phone</h3>
-                    <a 
-                      href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} 
-                      className="text-slate-600 dark:text-slate-300 hover:text-[var(--brand-gold)] transition-colors inline-flex items-center font-medium"
-                    >
-                      {siteConfig.phone}
-                    </a>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">Headquarters</h3>
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {siteConfig.address}
+                    </p>
                   </div>
                 </div>
 
@@ -49,7 +95,7 @@ export default function ContactPage() {
                     <Mail className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Email</h3>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">Email Inquiries</h3>
                     <a 
                       href={`mailto:${siteConfig.email}`} 
                       className="text-slate-600 dark:text-slate-300 hover:text-[var(--brand-gold)] transition-colors inline-flex items-center font-medium"
@@ -60,54 +106,42 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400">
-                    <MapPin className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Office</h3>
-                    <p className="text-slate-600 dark:text-slate-300 whitespace-pre-line">
-                      {siteConfig.address}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400">
                     <Clock className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Working Hours</h3>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1">Working Hours</h3>
                     <p className="text-slate-600 dark:text-slate-300">Mon – Sat: 9:00 AM – 6:00 PM IST</p>
                   </div>
                 </div>
-
-                {/* WhatsApp Quick Chat */}
-                {siteConfig.whatsapp && (
-                  <div className="pt-2">
-                    <a
-                      href={siteConfig.whatsapp}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-3 rounded-2xl bg-[#25D366]/10 border border-[#25D366]/30 px-5 py-3.5 text-sm font-bold text-[#25D366] hover:bg-[#25D366]/20 transition-all hover:-translate-y-0.5"
-                    >
-                      <img src="/media/whatsapp.webp" alt="" className="h-5 w-5 object-contain" />
-                      <span>Chat Directly with Project Team on WhatsApp</span>
-                    </a>
-                  </div>
-                )}
               </div>
 
-              {/* Google Map Embed */}
-              <div className="mt-12 w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-lg border border-[var(--border-soft)]">
+              {/* Corporate Pillars Badge Strip */}
+              <div className="mt-8 rounded-2xl border border-[var(--border-soft)] bg-slate-50/80 dark:bg-white/5 p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-3">
+                  Our Corporate Commitment
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                  {siteConfig.pillars.map((pillar) => (
+                    <div key={pillar.label} className="p-2">
+                      <p className="text-xs font-black text-slate-900 dark:text-white">{pillar.label}</p>
+                      <p className="text-[0.7rem] text-slate-500 dark:text-slate-400 mt-0.5">{pillar.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Google Map Embed (Lucknow Headquarters) */}
+              <div className="mt-8 w-full h-64 sm:h-72 rounded-2xl overflow-hidden shadow-lg border border-[var(--border-soft)]">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120610.15064619965!2d72.78453488219438!3d19.14717142416801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63e9c609d57%3A0x6b47c0b62e49c7f9!2sAndheri%20East%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1714152865243!5m2!1sen!2sin" 
+                  src="https://maps.google.com/maps?q=Amity+University+Malhaur+Lucknow+Uttar+Pradesh+226028&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
                   allowFullScreen={false} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Office Location"
+                  title="H.V Construction Office Location - Lucknow"
                 ></iframe>
               </div>
             </div>

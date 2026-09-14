@@ -9,6 +9,7 @@ import { SectorsSection } from "../components/sections/SectorsSection";
 import { TestimonialsSection } from "../components/sections/TestimonialsSection";
 import { FaqSection } from "../components/sections/FaqSection";
 import { InquiryFormSection } from "../components/sections/InquiryFormSection";
+import { InteriorSpotlightSection } from "../components/sections/InteriorSpotlightSection";
 import { CtaBanner } from "../components/sections/CtaBanner";
 
 export default function HomePage() {
@@ -26,6 +27,7 @@ export default function HomePage() {
         title="Our Expertise" 
         copy="Comprehensive construction & infrastructure solutions" 
       />
+      <InteriorSpotlightSection />
       <ApproachSection />
       <CapabilitiesOverview />
       <WhyHVSection />

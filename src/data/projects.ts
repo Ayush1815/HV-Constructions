@@ -165,5 +165,53 @@ export const projects: Project[] = [
     description: "End-to-end EPC design and build of an auto-components manufacturing unit with pre-engineered steel framing and logistics docks.",
     highlights: ["Single-point responsibility", "Delivered in 11 months", "PEB structure with heavy machine foundations"],
     image: "/media/turnkey/integrated-manufacturing-facility.webp"
+  },
+  {
+    id: "p13",
+    title: "Gomti Nagar Luxury Villa Living & Decor Suite",
+    category: "interior-design",
+    categoryLabel: "Interiors",
+    location: "Gomti Nagar, Lucknow",
+    status: "completed",
+    year: 2024,
+    description: "Complete turnkey residential interior design and decor execution for a 7,500 sq ft luxury villa, featuring Italian marble, fluted wood paneling, bespoke false ceilings, and designer furniture.",
+    highlights: ["Bespoke curved furniture curation", "Multi-level concealed LED cove lighting", "Turnkey design-to-handover in 4 months"],
+    image: "/media/interiors/luxury-living-room-decor.webp"
+  },
+  {
+    id: "p14",
+    title: "Hazratganj High-End Penthouse Master Suite",
+    category: "interior-design",
+    categoryLabel: "Interiors",
+    location: "Hazratganj, Lucknow",
+    status: "completed",
+    year: 2023,
+    description: "Bespoke master suite and walk-in wardrobe decor featuring acoustic charcoal wall paneling, natural oak herringbone flooring, and custom-tinted glass wardrobes with internal lighting.",
+    highlights: ["Acoustic designer headboard wall", "Integrated magnetic ceiling tracks", "Custom walk-in wardrobe suite"],
+    image: "/media/interiors/contemporary-master-suite.webp"
+  },
+  {
+    id: "p15",
+    title: "Vibhuti Khand Open-Concept Modular Kitchen & Dining",
+    category: "interior-design",
+    categoryLabel: "Interiors",
+    location: "Vibhuti Khand, Lucknow",
+    status: "completed",
+    year: 2024,
+    description: "State-of-the-art modular kitchen and dining room execution with Calacatta quartz waterfall island, seamless matte cabinetry, and fluted architectural partition screens.",
+    highlights: ["Calacatta marble waterfall island", "Architectural crystal chandelier installation", "Integrated smart appliance coordination"],
+    image: "/media/interiors/designer-modular-kitchen.webp"
+  },
+  {
+    id: "p16",
+    title: "Amar Shaheed Path Corporate Executive Fitout",
+    category: "interior-design",
+    categoryLabel: "Interiors",
+    location: "Shaheed Path, Lucknow",
+    status: "ongoing",
+    year: 2025,
+    description: "Turnkey luxury executive suites, boardroom, and client lounge featuring acoustic ceiling baffles, fluted timber louvers, and bespoke reception foyers.",
+    highlights: ["Modern executive boardroom fitout", "Acoustic ceiling profiling", "Architectural brass inlay flooring"],
+    image: "/media/interiors/luxury-penthouse-foyer.webp"
   }
 ];

@@ -42,9 +42,12 @@ const galleryImages: Record<string, { src: string; caption: string }[]> = {
     { src: "/media/residential/contemporary-timber-facade-home.webp", caption: "Modern Architectural Finishing" },
   ],
   "interior-design": [
-    { src: "/media/interiors/luxury-atrium-lobby-interiors.webp", caption: "Grand Atrium Reception & Lobby" },
-    { src: "/media/interiors/executive-director-cabin.webp", caption: "Corporate Boardroom & Executive Cabins" },
-    { src: "/media/interiors/luxury-retail-showroom-fitout.webp", caption: "High-End Commercial Retail Fit-Out" },
+    { src: "/media/interiors/luxury-living-room-decor.webp", caption: "Luxury Villa Living Room & Fluted Accent Wall" },
+    { src: "/media/interiors/contemporary-master-suite.webp", caption: "Master Bedroom Suite & Ambient Cove Lighting" },
+    { src: "/media/interiors/designer-modular-kitchen.webp", caption: "Bespoke Modular Kitchen with Calacatta Quartz Island" },
+    { src: "/media/interiors/luxury-dining-room.webp", caption: "Architectural Dining Suite & Chandelier Decor" },
+    { src: "/media/interiors/architectural-ceiling-lighting.webp", caption: "Multi-Level False Ceiling with Magnetic Track Lights" },
+    { src: "/media/interiors/luxury-penthouse-foyer.webp", caption: "Private Penthouse Foyer & Statement Brass Mirror" },
   ],
   "turnkey-solutions": [
     { src: "/media/turnkey/integrated-manufacturing-facility.webp", caption: "Industrial Manufacturing Campus" },

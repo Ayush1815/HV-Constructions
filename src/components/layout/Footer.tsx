@@ -102,14 +102,19 @@ export function Footer() {
               Contact Details
             </h3>
             <div className="flex flex-col space-y-4 text-slate-300">
-              <span className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand-gold)]" />
-                <span className="leading-relaxed">
-                  <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} className="transition hover:text-[var(--brand-gold)]">
-                    {siteConfig.phone}
-                  </a>
+              <div className="flex flex-col space-y-2">
+                <span className="flex items-start gap-3">
+                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[var(--brand-gold)]" />
+                  <span className="leading-relaxed flex flex-col">
+                    <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} className="transition hover:text-[var(--brand-gold)] font-medium">
+                      {siteConfig.phone} <span className="text-xs text-slate-400">(Mr. Anand Mishra)</span>
+                    </a>
+                    <a href={`tel:${siteConfig.secondaryPhone.replace(/\s+/g, '')}`} className="transition hover:text-[var(--brand-gold)] font-medium mt-1">
+                      {siteConfig.secondaryPhone} <span className="text-xs text-slate-400">(Mr. Sandeep Goswami)</span>
+                    </a>
+                  </span>
                 </span>
-              </span>
+              </div>
               <span className="flex items-center gap-3">
                 <Mail className="h-5 w-5 shrink-0 text-[var(--brand-gold)]" />
                 <a href={`mailto:${siteConfig.email}`} className="transition hover:text-[var(--brand-gold)]">
@@ -129,7 +134,7 @@ export function Footer() {
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 sm:flex-row">
           <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <p className="hidden md:block">Building Infrastructure. Creating Spaces. Shaping the Future.</p>
+            <p className="hidden md:block">Building Tomorrow Together</p>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-bold text-white hover:bg-white/10 hover:border-[var(--brand-gold)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-gold)]"
