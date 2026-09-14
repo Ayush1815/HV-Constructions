@@ -15,6 +15,7 @@ type HeaderProps = {
 export function Header({ theme, onToggleTheme }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -25,6 +26,13 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
     let lastY = window.scrollY;
     const handleScroll = () => {
       const currentY = window.scrollY;
+      
+      if (currentY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
       if (currentY > 90 && currentY > lastY && !mobileOpen) {
         setHidden(true);
       } else if (currentY < lastY || currentY <= 90) {
@@ -48,8 +56,11 @@ export function Header({ theme, onToggleTheme }: HeaderProps) {
 
   return (
     <header className={classNames(
-      "fixed inset-x-0 top-4 z-50 px-4 sm:top-6 lg:px-8 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-      hidden ? "-translate-y-28" : "translate-y-0"
+      "fixed inset-x-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+      isScrolled 
+        ? "top-0 bg-white/95 py-3 px-4 shadow-sm backdrop-blur-md dark:bg-[#071017]/95 lg:px-8 border-b border-slate-200/50 dark:border-white/5" 
+        : "top-4 sm:top-6 px-4 lg:px-8",
+      hidden ? "-translate-y-full" : "translate-y-0"
     )}>
       <nav
         className="mx-auto flex max-w-[1280px] items-center justify-between gap-3"
