@@ -1,7 +1,7 @@
 import { useSeo } from "../hooks/useSeo";
 import { InquiryFormSection } from "../components/sections/InquiryFormSection";
 import { Reveal } from "../components/ui/Reveal";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Download, FileText } from "lucide-react";
 import { siteConfig } from "../config/site";
 
 export default function ContactPage() {
@@ -129,6 +129,35 @@ export default function ContactPage() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* RCC Works & Civil Contractor Brochure Download Card */}
+              <div className="mt-8 rounded-2xl border border-[var(--brand-gold)]/40 bg-gradient-to-br from-amber-500/10 via-slate-900/30 to-slate-950 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-[var(--brand-gold)]/20 px-2 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-wider text-[var(--brand-gold)] flex items-center gap-1">
+                      <FileText className="h-3 w-3" />
+                      Official Company Dossier
+                    </span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">PDF • 2 Pages • A4</span>
+                  </div>
+                  <h4 className="text-base font-bold text-slate-900 dark:text-white">
+                    RCC Works & Civil Contractor Brochure
+                  </h4>
+                  <p className="text-xs text-slate-600 dark:text-slate-300">
+                    Includes 12 core capabilities, BOQ contract options, plant & machinery fleet, and IS code quality standards.
+                  </p>
+                </div>
+                <a
+                  href="/documents/HV-Construction-RCC-Civil-Brochure.pdf"
+                  download="HV-Construction-RCC-Civil-Brochure.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex flex-shrink-0 items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-4 py-2.5 text-xs font-bold text-slate-950 shadow-md hover:from-amber-400 hover:to-amber-500 transition-all"
+                >
+                  <Download className="h-4 w-4" />
+                  <span>Download PDF</span>
+                </a>
               </div>
 
               {/* Google Map Embed (Lucknow Headquarters) */}

@@ -3,7 +3,7 @@ import { useSeo } from "../hooks/useSeo";
 import { getExpertiseBySlug, expertiseAreas } from "../data/expertise";
 import { Reveal } from "../components/ui/Reveal";
 import { ButtonLink } from "../components/ui/ButtonLink";
-import { ArrowRight, CheckCircle2, ShieldCheck, Users, Trophy, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Users, Trophy, ChevronRight, Download } from "lucide-react";
 
 const galleryImages: Record<string, { src: string; caption: string }[]> = {
   "government-infrastructure": [
@@ -252,6 +252,17 @@ export default function ExpertiseDetailPage() {
                   <ButtonLink to="/contact" className="w-full justify-center text-center">
                     Get Project Estimate
                   </ButtonLink>
+
+                  <a
+                    href="/documents/HV-Construction-RCC-Civil-Brochure.pdf"
+                    download="HV-Construction-RCC-Civil-Brochure.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-[var(--brand-gold)]/40 bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)]/20 px-4 py-2.5 text-xs font-bold text-[var(--brand-gold)] dark:text-[var(--brand-gold)] transition-all text-center w-full"
+                  >
+                    <Download className="h-4 w-4" />
+                    <span>Download RCC Brochure (PDF)</span>
+                  </a>
                 </div>
               </Reveal>
             </div>

@@ -75,6 +75,15 @@ export function Footer() {
               <Link to="/expertise" className="w-fit transition hover:text-[var(--brand-gold)]">Our Expertise</Link>
               <Link to="/projects" className="w-fit transition hover:text-[var(--brand-gold)]">Projects</Link>
               <Link to="/contact" className="w-fit transition hover:text-[var(--brand-gold)]">Contact Us</Link>
+              <a 
+                href="/documents/HV-Construction-RCC-Civil-Brochure.pdf" 
+                download="HV-Construction-RCC-Civil-Brochure.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-fit transition hover:text-white font-semibold text-[var(--brand-gold)] flex items-center gap-1.5"
+              >
+                <span>RCC Brochure (PDF)</span>
+              </a>
               <Link to="/terms" className="w-fit transition hover:text-[var(--brand-gold)]">Terms &amp; Conditions</Link>
               <Link to="/privacy" className="w-fit transition hover:text-[var(--brand-gold)]">Privacy Policy</Link>
             </div>
