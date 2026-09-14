@@ -90,13 +90,12 @@ export function InquiryFormSection({ hideText = false }: { hideText?: boolean })
   const fieldBase =
     "mt-2 w-full rounded-2xl border border-[var(--border-soft)] bg-white px-4 py-3.5 text-sm font-semibold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[var(--brand-gold)] focus:ring-4 focus:ring-amber-500/15 dark:bg-white/8 dark:text-white dark:placeholder:text-slate-500";
 
-  const formContent = (
-    <Reveal>
-      <form
-        onSubmit={onSubmit}
-        noValidate
-        className="rounded-[2rem] border border-[var(--border-soft)] bg-[var(--surface-light-elevated)] p-5 shadow-[0_34px_100px_-62px_rgba(11,37,64,0.72)] dark:bg-[var(--surface-dark-elevated)] sm:p-7"
-      >
+  const formElement = (
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      className="rounded-[2rem] border border-[var(--border-soft)] bg-[var(--surface-light-elevated)] p-5 shadow-[0_34px_100px_-62px_rgba(11,37,64,0.72)] dark:bg-[var(--surface-dark-elevated)] sm:p-7"
+    >
             <input
               type="text"
               name="website"
@@ -285,11 +284,10 @@ export function InquiryFormSection({ hideText = false }: { hideText?: boolean })
               )}
             </AnimatePresence>
           </form>
-    </Reveal>
   );
 
   if (hideText) {
-    return formContent;
+    return formElement;
   }
 
   return (
@@ -318,7 +316,9 @@ export function InquiryFormSection({ hideText = false }: { hideText?: boolean })
             </span>
           </div>
         </div>
-        {formContent}
+        <Reveal>
+          {formElement}
+        </Reveal>
       </div>
     </section>
   );

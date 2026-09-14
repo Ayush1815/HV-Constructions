@@ -254,14 +254,14 @@ export default function ExpertiseDetailPage() {
                   </ButtonLink>
 
                   <a
-                    href="/documents/HV-Construction-RCC-Civil-Brochure.pdf"
-                    download="HV-Construction-RCC-Civil-Brochure.pdf"
+                    href="/documents/HV-Construction-Corporate-Brochure.pdf"
+                    download="HV-Construction-Corporate-Brochure.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 rounded-xl border border-[var(--brand-gold)]/40 bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)]/20 px-4 py-2.5 text-xs font-bold text-[var(--brand-gold)] dark:text-[var(--brand-gold)] transition-all text-center w-full"
                   >
                     <Download className="h-4 w-4" />
-                    <span>Download RCC Brochure (PDF)</span>
+                    <span>Download Corporate Brochure (PDF)</span>
                   </a>
                 </div>
               </Reveal>
