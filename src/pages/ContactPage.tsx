@@ -14,10 +14,11 @@ export default function ContactPage() {
   return (
     <div className="pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-48">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left Column - Contact Coordinates & Executives */}
-          <Reveal>
-            <div className="space-y-8">
+        {/* Main Grid: Left Column (Coordinates & Map) + Right Column (Inquiry Form) */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+          {/* Left Column - Contact Coordinates & Executives & Map */}
+          <Reveal className="h-full">
+            <div className="space-y-6 flex flex-col justify-between h-full">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.26em] text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-3">
                   Get In Touch
@@ -118,13 +119,13 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Google Map Embed (Lucknow Headquarters) */}
-              <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden shadow-sm border border-[var(--border-soft)]">
+              {/* Google Map Embed (Lucknow Headquarters) - Adjusted to fill height and align seamlessly with form */}
+              <div className="w-full flex-1 min-h-[260px] sm:min-h-[280px] lg:min-h-[300px] rounded-2xl overflow-hidden shadow-sm border border-[var(--border-soft)]">
                 <iframe 
                   src="https://maps.google.com/maps?q=Amity+University+Malhaur+Lucknow+Uttar+Pradesh+226028&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                   width="100%" 
                   height="100%" 
-                  style={{ border: 0 }} 
+                  style={{ border: 0, minHeight: "260px" }} 
                   allowFullScreen={false} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
@@ -134,94 +135,101 @@ export default function ContactPage() {
             </div>
           </Reveal>
 
-          {/* Right Column - Project Inquiry Form + Corporate Commitment & Brochure */}
-          <div className="space-y-6">
+          {/* Right Column - Project Inquiry Form */}
+          <div className="h-full">
             <InquiryFormSection hideText={true} />
+          </div>
+        </div>
 
-            {/* Corporate Commitment & Brochure Download Grid - Placed cleanly under the form */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Card 1: Corporate Commitment */}
-              <div className="rounded-2xl border border-[var(--border-soft)] bg-white/70 dark:bg-[var(--surface-dark-elevated)]/60 p-5 shadow-sm backdrop-blur-xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 mb-2.5">
-                    <span className="rounded-full bg-amber-500/10 dark:bg-amber-400/10 px-2.5 py-0.5 text-[0.68rem] font-bold text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] border border-amber-500/20 uppercase tracking-wider">
-                      Corporate Commitment
-                    </span>
-                  </div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">
-                    Built With Integrity
-                  </h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-2.5 border border-slate-100 dark:border-white/5">
-                      <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-0.5">
-                        <Award className="h-3.5 w-3.5 shrink-0" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white">Quality</span>
-                      </div>
-                      <p className="text-[0.68rem] text-slate-500 dark:text-slate-400 leading-tight">Rigorous standards &amp; premium materials</p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-2.5 border border-slate-100 dark:border-white/5">
-                      <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-0.5">
-                        <Handshake className="h-3.5 w-3.5 shrink-0" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white">Trust</span>
-                      </div>
-                      <p className="text-[0.68rem] text-slate-500 dark:text-slate-400 leading-tight">Transparent execution &amp; integrity</p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-2.5 border border-slate-100 dark:border-white/5">
-                      <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-0.5">
-                        <Building2 className="h-3.5 w-3.5 shrink-0" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white">Strength</span>
-                      </div>
-                      <p className="text-[0.68rem] text-slate-500 dark:text-slate-400 leading-tight">Structures engineered to endure</p>
-                    </div>
-
-                    <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-2.5 border border-slate-100 dark:border-white/5">
-                      <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-0.5">
-                        <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
-                        <span className="text-xs font-bold text-slate-900 dark:text-white">Safety</span>
-                      </div>
-                      <p className="text-[0.68rem] text-slate-500 dark:text-slate-400 leading-tight">Zero-compromise site protocols</p>
-                    </div>
-                  </div>
+        {/* Corporate Commitment & Brochure Download Grid - Placed In Line across full width */}
+        <div className="mt-8 lg:mt-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+            {/* Card 1: Corporate Commitment (Uncramped, 4 Pillars in a row) */}
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-white/70 dark:bg-[var(--surface-dark-elevated)]/60 p-6 sm:p-7 shadow-sm backdrop-blur-xl flex flex-col justify-between">
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  <span className="rounded-full bg-amber-500/10 dark:bg-amber-400/10 px-3 py-1 text-[0.7rem] font-bold text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] border border-amber-500/20 uppercase tracking-wider">
+                    Corporate Commitment
+                  </span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                    Response: <strong className="text-slate-800 dark:text-slate-200">Within 1 Day</strong>
+                  </span>
                 </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                  Built With Integrity
+                </h3>
                 
-                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between text-[0.7rem] text-slate-500 dark:text-slate-400 font-medium">
-                  <span>Response Time:</span>
-                  <span className="text-slate-700 dark:text-slate-200 font-bold">Within 1 Business Day</span>
+                {/* 4 Pillars In One Line on Tablet/Desktop, 2x2 on Mobile */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-3 border border-slate-100 dark:border-white/5">
+                    <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-1">
+                      <Award className="h-4 w-4 shrink-0" />
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">Quality</span>
+                    </div>
+                    <p className="text-[0.72rem] text-slate-500 dark:text-slate-400 leading-snug">Rigorous standards &amp; premium materials</p>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-3 border border-slate-100 dark:border-white/5">
+                    <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-1">
+                      <Handshake className="h-4 w-4 shrink-0" />
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">Trust</span>
+                    </div>
+                    <p className="text-[0.72rem] text-slate-500 dark:text-slate-400 leading-snug">Transparent execution &amp; lasting integrity</p>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-3 border border-slate-100 dark:border-white/5">
+                    <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-1">
+                      <Building2 className="h-4 w-4 shrink-0" />
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">Strength</span>
+                    </div>
+                    <p className="text-[0.72rem] text-slate-500 dark:text-slate-400 leading-snug">Structures engineered to endure</p>
+                  </div>
+
+                  <div className="rounded-xl bg-slate-50/80 dark:bg-white/5 p-3 border border-slate-100 dark:border-white/5">
+                    <div className="flex items-center gap-1.5 text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] mb-1">
+                      <ShieldCheck className="h-4 w-4 shrink-0" />
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">Safety</span>
+                    </div>
+                    <p className="text-[0.72rem] text-slate-500 dark:text-slate-400 leading-snug">Zero-compromise on-site protocols</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Card 2: Corporate Brochure Download (Styled cleanly to match site theme) */}
-              <div className="rounded-2xl border border-[var(--border-soft)] bg-white/70 dark:bg-[var(--surface-dark-elevated)]/60 p-5 shadow-sm backdrop-blur-xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2.5">
-                    <span className="rounded-full bg-amber-500/10 dark:bg-amber-400/10 px-2.5 py-0.5 text-[0.68rem] font-bold text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] border border-amber-500/20 uppercase tracking-wider inline-flex items-center gap-1">
-                      <FileText className="h-3 w-3" />
-                      Company Dossier
-                    </span>
-                    <span className="text-[0.7rem] text-slate-500 dark:text-slate-400 font-semibold">3 Pages • A4</span>
-                  </div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white mb-1.5">
-                    Corporate Brochure
-                  </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Complete capability dossier covering Turnkey Interiors, Jal Jeevan &amp; Telecom Infrastructure, Civil &amp; RCC Works, and BOQ contract frameworks.
-                  </p>
-                </div>
+              <div className="mt-5 pt-3 border-t border-slate-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <span>Compliance &amp; Execution:</span>
+                <span className="text-slate-700 dark:text-slate-300 font-semibold">IS Codes &amp; CPWD Specs</span>
+              </div>
+            </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/5">
-                  <a
-                    href="/documents/HV-Construction-Corporate-Brochure.pdf"
-                    download="HV-Construction-Corporate-Brochure.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--brand-gold)] hover:bg-[var(--brand-gold-hover)] text-slate-950 font-bold px-4 py-2.5 text-xs shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/40"
-                  >
-                    <Download className="h-4 w-4" />
-                    <span>Download Brochure (PDF)</span>
-                  </a>
+            {/* Card 2: Corporate Brochure Download (Uncramped, In Line with Card 1) */}
+            <div className="rounded-2xl border border-[var(--border-soft)] bg-white/70 dark:bg-[var(--surface-dark-elevated)]/60 p-6 sm:p-7 shadow-sm backdrop-blur-xl flex flex-col justify-between">
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  <span className="rounded-full bg-amber-500/10 dark:bg-amber-400/10 px-3 py-1 text-[0.7rem] font-bold text-[var(--brand-gold-muted)] dark:text-[var(--brand-gold)] border border-amber-500/20 uppercase tracking-wider inline-flex items-center gap-1.5">
+                    <FileText className="h-3.5 w-3.5" />
+                    Company Dossier
+                  </span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">3 Pages • A4 PDF</span>
                 </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                  Master Corporate Brochure
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                  Complete capability dossier covering Turnkey Interiors, Jal Jeevan &amp; Telecom Infrastructure, Civil &amp; RCC Works, and BOQ contract frameworks.
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-slate-100 dark:border-white/5">
+                <a
+                  href="/documents/HV-Construction-Corporate-Brochure.pdf"
+                  download="HV-Construction-Corporate-Brochure.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2.5 rounded-xl bg-[var(--brand-gold)] hover:bg-[var(--brand-gold-hover)] text-slate-950 font-bold px-5 py-3 text-sm shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-amber-500/40"
+                >
+                  <Download className="h-4 w-4" />
+                  <span>Download Master Brochure (PDF)</span>
+                </a>
               </div>
             </div>
           </div>
