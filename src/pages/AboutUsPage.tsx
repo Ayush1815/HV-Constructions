@@ -4,6 +4,7 @@ import { CompanyStory } from "../components/about/CompanyStory";
 import { CoreValues } from "../components/about/CoreValues";
 import { CompanyFeatures } from "../components/about/CompanyFeatures";
 import { Capabilities } from "../components/about/Capabilities";
+import { ClientsSection } from "../components/sections/ClientsSection";
 import { TestimonialsSection } from "../components/sections/TestimonialsSection";
 import { CtaBanner } from "../components/sections/CtaBanner";
 
@@ -18,6 +19,7 @@ export default function AboutUsPage() {
     <div className="pt-24">
       <AboutHero />
       <CompanyStory />
+      <ClientsSection />
       <CoreValues />
       <CompanyFeatures />
       <Capabilities />

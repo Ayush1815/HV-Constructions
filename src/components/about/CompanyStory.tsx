@@ -2,9 +2,9 @@ import { Reveal, SectionHeader } from "../ui/Reveal";
 import { AnimatedCounter } from "../ui/AnimatedCounter";
 
 const stats = [
-  { label: "Projects Completed", value: 500, suffix: "+" },
-  { label: "Sq Ft Built (Millions)", value: 10, suffix: "M+" },
-  { label: "Years Experience", value: 15, suffix: "+" },
+  { label: "Projects Completed", value: 50, suffix: "+" },
+  { label: "Sq Ft Built (Millions)", value: 1, suffix: "M+" },
+  { label: "Years Experience", value: 11, suffix: "+" },
   { label: "Team Size", value: 200, suffix: "+" },
 ];
 

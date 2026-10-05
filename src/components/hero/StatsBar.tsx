@@ -2,9 +2,9 @@ import { AnimatedCounter } from "../ui/AnimatedCounter";
 
 export function StatsBar() {
   const stats = [
-    { value: 500, suffix: "+", label: "Projects Completed" },
-    { value: 10, suffix: "M+", label: "Sq. Ft. Constructed" },
-    { value: 15, suffix: "+", label: "Years Experience" },
+    { value: 50, suffix: "+", label: "Projects Completed" },
+    { value: 1, suffix: "M+", label: "Sq. Ft. Constructed" },
+    { value: 11, suffix: "+", label: "Years Experience" },
     { value: 200, suffix: "+", label: "Team Members" },
   ];
 

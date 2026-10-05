@@ -1,5 +1,6 @@
 import { useSeo } from "../hooks/useSeo";
 import { HeroSection } from "../components/hero/HeroSection";
+import { ClientsSection } from "../components/sections/ClientsSection";
 import { ServiceCarousel } from "../components/service-carousel/ServiceCarousel";
 import { ApproachSection } from "../components/sections/ApproachSection";
 import { CapabilitiesOverview } from "../components/sections/CapabilitiesOverview";
@@ -23,6 +24,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <ClientsSection />
       <ServiceCarousel 
         title="Our Expertise" 
         copy="Comprehensive construction & infrastructure solutions" 
