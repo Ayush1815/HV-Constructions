@@ -18,10 +18,10 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: "t2",
-    quote: "The Jal Jeevan Mission project in our district was executed flawlessly. They managed complex terrain and delivered a robust water distribution network that serves thousands.",
-    author: "Vikram Desai",
-    role: "Executive Engineer",
-    company: "State Water Board",
+    quote: "Their team transformed our corporate office space completely. From meticulous space planning and modern interior design to flawless execution, the turnkey interior solutions they provided exceeded all our expectations.",
+    author: "Siddharth Verma",
+    role: "Chief Executive Officer",
+    company: "NovaSpace Private Ltd.",
     rating: 5,
   },
   {
