@@ -23,7 +23,11 @@ const clients = [
   },
   {
     name: "DILEEP BUILDCON",
-    logo: <img src="https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://dilipbuildcon.com&size=128" alt="Dileep Buildcon" className="h-12 w-auto object-contain opacity-70 grayscale transition-all hover:opacity-100 hover:grayscale-0 dark:opacity-80 dark:hover:opacity-100" />
+    logo: <img src="/media/clients/dileep.png" alt="Dileep Buildcon" className="h-12 w-auto object-contain opacity-70 grayscale transition-all hover:opacity-100 hover:grayscale-0 dark:opacity-80 dark:invert dark:hover:opacity-100" />
+  },
+  {
+    name: "APCO",
+    logo: <img src="/media/clients/apco.png" alt="APCO" className="h-12 w-auto object-contain opacity-70 grayscale transition-all hover:opacity-100 hover:grayscale-0 dark:opacity-80 dark:invert dark:hover:opacity-100" />
   }
 ];
 
