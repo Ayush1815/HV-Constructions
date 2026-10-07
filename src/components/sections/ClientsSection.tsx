@@ -1,4 +1,5 @@
 import { Reveal } from "../ui/Reveal";
+import { motion } from "motion/react";
 
 const clients = [
   {
@@ -32,23 +33,41 @@ const clients = [
 ];
 
 export function ClientsSection() {
+  const duplicatedClients = [...clients, ...clients];
+
   return (
-    <section className="border-b border-[var(--border-soft)] bg-white py-12 dark:bg-[#071017]">
+    <section className="overflow-hidden border-b border-[var(--border-soft)] bg-white py-12 dark:bg-[#071017]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
               Trusted By Industry Leaders
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-10 lg:gap-x-16">
-              {clients.map((client, idx) => (
-                <div key={idx} className="flex items-center justify-center" title={client.name}>
-                  {client.logo}
-                </div>
-              ))}
-            </div>
           </div>
         </Reveal>
+      </div>
+
+      <div className="relative mt-12 flex w-full overflow-hidden">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-[#071017]"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-[#071017]"></div>
+
+        <motion.div
+          className="flex flex-nowrap items-center gap-16 pr-16"
+          style={{ width: "max-content" }}
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+        >
+          {duplicatedClients.map((client, idx) => (
+            <div key={idx} className="flex flex-col items-center justify-center gap-4">
+              <div className="flex h-12 items-center justify-center">
+                {client.logo}
+              </div>
+              <span className="whitespace-nowrap text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                {client.name}
+              </span>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
