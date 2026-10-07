@@ -33,23 +33,40 @@ const clients = [
 ];
 
 export function ClientsSection() {
-  const duplicatedClients = [...clients, ...clients];
+  // Duplicate 4 times to ensure scrollWidth is massively larger than any single monitor, 
+  // preventing scrollLeft from hitting the browser's max limit.
+  const duplicatedClients = [...clients, ...clients, ...clients, ...clients];
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     let animationId: number;
-    const animate = () => {
+    let lastTime = performance.now();
+    let accumulatedScroll = 0;
+    const speed = 40; // Pixels per second
+
+    const animate = (time: number) => {
       if (!isPaused && containerRef.current) {
-        containerRef.current.scrollLeft += 1;
-        
-        // Reset seamlessly when reaching exactly halfway
-        if (containerRef.current.scrollLeft >= containerRef.current.scrollWidth / 2) {
-          containerRef.current.scrollLeft = 0;
+        const dt = (time - lastTime) / 1000;
+        accumulatedScroll += speed * dt;
+
+        if (accumulatedScroll >= 1) {
+          const pixelsToScroll = Math.floor(accumulatedScroll);
+          containerRef.current.scrollLeft += pixelsToScroll;
+          accumulatedScroll -= pixelsToScroll;
+
+          // With 4 sets, one full set of 7 clients is exactly scrollWidth / 4.
+          const singleSetWidth = containerRef.current.scrollWidth / 4;
+          
+          if (containerRef.current.scrollLeft >= singleSetWidth) {
+            containerRef.current.scrollLeft -= singleSetWidth;
+          }
         }
       }
+      lastTime = time;
       animationId = requestAnimationFrame(animate);
     };
+    
     animationId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationId);
   }, [isPaused]);
@@ -68,13 +85,13 @@ export function ClientsSection() {
 
       <div className="relative mt-12 flex w-full">
         {/* Fade masks */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-[#071017]"></div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-[#071017]"></div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-[#071017] md:w-32"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-[#071017] md:w-32"></div>
 
         {/* Scrollable Container */}
         <div
           ref={containerRef}
-          className="flex flex-nowrap items-center gap-16 pr-16 overflow-x-auto select-none"
+          className="flex flex-nowrap items-center gap-20 pr-20 overflow-x-auto select-none lg:gap-32 lg:pr-32"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -88,7 +105,7 @@ export function ClientsSection() {
           `}</style>
           
           {duplicatedClients.map((client, idx) => (
-            <div key={idx} className="flex shrink-0 flex-col items-center justify-center gap-4">
+            <div key={idx} className="flex min-w-[120px] md:min-w-[160px] shrink-0 flex-col items-center justify-center gap-4">
               <div className="flex h-12 items-center justify-center dark:rounded-xl dark:bg-white/90 dark:px-4 dark:py-2">
                 {client.logo}
               </div>
