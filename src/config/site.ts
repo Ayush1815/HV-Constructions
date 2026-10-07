@@ -3,8 +3,8 @@ export const siteConfig = {
   shortName: "H.V Construction",
   tagline: "Building Tomorrow Together",
   secondaryTagline: "Building Infrastructure. Creating Spaces. Shaping the Future.",
-  url: "https://hvconstruction.com",
-  email: "info@hvconstruction.com",
+  url: "https://hvconstruction.co.in",
+  email: "info@hvconstruction.co.in",
   phone: "+91 78002 59225",
   secondaryPhone: "+91 81159 99307",
   contacts: [

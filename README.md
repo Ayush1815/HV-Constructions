@@ -1,6 +1,6 @@
-# SellSavvy
+# HV Construction
 
-Premium ecommerce growth marketing site built with Vite, React 19, React Router, Tailwind CSS v4, and React Three Fiber.
+Premium construction & infrastructure company website built with Vite, React 19, React Router, Tailwind CSS v4, and React Three Fiber.
 
 ## Development
 
