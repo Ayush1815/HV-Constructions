@@ -4,31 +4,31 @@ import { useEffect, useRef, useState } from "react";
 const clients = [
   {
     name: "HUGEL INFRA",
-    logo: <img src="/media/clients/hugel.png" alt="Hugel Infra" className="h-12 w-auto object-contain transition-transform hover:scale-105" />
+    logo: <img src="/media/clients/hugel.png" alt="Hugel Infra" className="h-10 w-auto object-contain" />
   },
   {
     name: "VTL",
-    logo: <img src="/media/clients/vtl.png" alt="VTL" className="h-12 w-auto object-contain transition-transform hover:scale-105" />
+    logo: <img src="/media/clients/vtl.png" alt="VTL" className="h-10 w-auto object-contain" />
   },
   {
     name: "PNC INFRATECH",
-    logo: <img src="/media/clients/pnc.png" alt="PNC Infratech" className="h-12 w-auto object-contain transition-transform hover:scale-105" />
+    logo: <img src="/media/clients/pnc.png" alt="PNC Infratech" className="h-10 w-auto object-contain" />
   },
   {
     name: "DRA INFRA",
-    logo: <img src="/media/clients/dra.png" alt="DRA Infra" className="h-12 w-auto object-contain transition-transform hover:scale-105" />
+    logo: <img src="/media/clients/dra.png" alt="DRA Infra" className="h-10 w-auto object-contain" />
   },
   {
     name: "SKYLARK",
-    logo: <img src="/media/clients/skylark.png" alt="Skylark" className="h-12 w-auto object-contain transition-transform hover:scale-105" />
+    logo: <img src="/media/clients/skylark.png" alt="Skylark" className="h-10 w-auto object-contain" />
   },
   {
     name: "DILEEP BUILDCON",
-    logo: <img src="/media/clients/dileep.png" alt="Dileep Buildcon" className="h-12 w-auto object-contain transition-transform hover:scale-105" />
+    logo: <img src="/media/clients/dileep.png" alt="Dileep Buildcon" className="h-10 w-auto object-contain" />
   },
   {
     name: "APCO",
-    logo: <img src="/media/clients/apco.png" alt="APCO" className="h-12 w-auto object-contain transition-transform hover:scale-105" />
+    logo: <img src="/media/clients/apco.png" alt="APCO" className="h-10 w-auto object-contain" />
   }
 ];
 
@@ -105,8 +105,8 @@ export function ClientsSection() {
           `}</style>
           
           {duplicatedClients.map((client, idx) => (
-            <div key={idx} className="flex min-w-[120px] md:min-w-[160px] shrink-0 flex-col items-center justify-center gap-4">
-              <div className="flex h-12 items-center justify-center dark:rounded-xl dark:bg-white/90 dark:px-4 dark:py-2">
+            <div key={idx} className="flex min-w-[140px] md:min-w-[180px] shrink-0 flex-col items-center justify-center gap-5">
+              <div className="flex h-20 w-full items-center justify-center rounded-xl bg-white px-4 shadow-sm ring-1 ring-slate-900/5 transition-transform hover:scale-105 dark:bg-white dark:ring-0">
                 {client.logo}
               </div>
               <span className="whitespace-nowrap text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
